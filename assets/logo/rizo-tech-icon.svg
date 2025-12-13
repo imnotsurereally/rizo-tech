@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Rizo Tech ColdDial icon">
+  <circle cx="60" cy="60" r="44" fill="none" stroke="#0A2540" stroke-width="14"/>
+  <path d="M60 16 A44 44 0 0 1 104 60"
+        fill="none"
+        stroke="#38E8FF"
+        stroke-width="14"
+        stroke-linecap="round"/>
+</svg>
