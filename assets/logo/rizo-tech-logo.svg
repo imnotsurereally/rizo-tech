@@ -1,28 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140" role="img" aria-label="Rizo Tech logo">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 220" role="img" aria-label="Rizo Tech logo with RT monogram">
   <!-- Icon -->
   <g transform="translate(10,10)">
-    <circle cx="60" cy="60" r="44" fill="none" stroke="#0A2540" stroke-width="14"/>
-    <path d="M60 16 A44 44 0 0 1 104 60"
-          fill="none"
-          stroke="#38E8FF"
-          stroke-width="14"
-          stroke-linecap="round"/>
+    <rect x="0" y="0" width="200" height="200" rx="26" fill="#0A2540"/>
+    <path d="M25 150 L150 25" stroke="#38E8FF" stroke-width="18" stroke-linecap="round" opacity="0.95"/>
+    <text x="45" y="142"
+          font-family="Impact, Arial Black, system-ui, sans-serif"
+          font-size="92"
+          font-weight="900"
+          letter-spacing="2"
+          fill="#FFFFFF">RT</text>
   </g>
 
   <!-- Wordmark -->
-  <g transform="translate(150,32)">
-    <text x="0" y="38"
+  <g transform="translate(250,62)">
+    <text x="0" y="52"
           font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
-          font-size="54"
-          font-weight="700"
-          letter-spacing="-1.2"
+          font-size="72"
+          font-weight="800"
+          letter-spacing="-1.5"
           fill="#0A2540">RIZO</text>
 
-    <text x="0" y="92"
+    <text x="0" y="128"
           font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
-          font-size="48"
-          font-weight="600"
-          letter-spacing="-1.0"
+          font-size="64"
+          font-weight="750"
+          letter-spacing="-1.2"
           fill="#0A2540">TECH</text>
   </g>
 </svg>
