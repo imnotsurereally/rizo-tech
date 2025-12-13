@@ -1,8 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Rizo Tech ColdDial icon">
-  <circle cx="60" cy="60" r="44" fill="none" stroke="#0A2540" stroke-width="14"/>
-  <path d="M60 16 A44 44 0 0 1 104 60"
-        fill="none"
-        stroke="#38E8FF"
-        stroke-width="14"
-        stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-label="Rizo Tech RT monogram icon">
+  <!-- Background badge -->
+  <rect x="10" y="10" width="200" height="200" rx="26" fill="#0A2540"/>
+
+  <!-- Cold accent slash (adds energy + refrigeration cue) -->
+  <path d="M35 150 L150 35" stroke="#38E8FF" stroke-width="18" stroke-linecap="round" opacity="0.95"/>
+
+  <!-- RT letters (bold, readable, trade-safe) -->
+  <text x="55" y="145"
+        font-family="Impact, Arial Black, system-ui, sans-serif"
+        font-size="92"
+        font-weight="900"
+        letter-spacing="2"
+        fill="#FFFFFF">RT</text>
 </svg>
