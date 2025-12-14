@@ -1,351 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rizo Tech — Frozen Beverage & Ice Machines</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rizo Tech — Frozen Beverage & Ice Systems</title>
 
-  <style>
-    :root{
-      --bg:#070708;
-      --bg2:#0b0b0c;
-      --panel:#0f1012;
-      --text:#e9e9ea;
-      --muted:#a5a5aa;
-      --line:#1c1c20;
-      --shadow: rgba(0,0,0,.7);
-      --radius:18px;
+<style>
+:root{
+  --bg:#070708;
+  --bg2:#0c0d0f;
+  --panel:#111216;
+  --line:#1f2026;
+  --text:#e8e8ea;
+  --muted:#a2a4ab;
+  --accent:#ffffff;
 
-      /* spacing scale */
-      --padX: 26px;
-      --wrapTop: 36px;
-      --wrapBottom: 120px;
-      --heroTop: 120px;
-      --heroBottom: 56px;
-      --sectionTop: 92px;
-      --sectionPadTop: 78px;
-      --stack: 20px;
-    }
+  --wrap:1200px;
+  --pad:26px;
 
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{
-      background:
-        radial-gradient(1200px 700px at 50% -10%, #121318 0%, var(--bg) 55%),
-        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
-      color:var(--text);
-      font-family:"Inter",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
-      font-feature-settings:"ss01","cv01","cv02";
-      line-height:1.55;
-      letter-spacing:.15px;
-      overflow-x:hidden;
-    }
+  --heroTop:120px;
+  --heroBottom:90px;
+  --sectionTop:110px;
+}
 
-    /* subtle industrial grid */
-    body:before{
-      content:"";
-      position:fixed;inset:0;
-      background:
-        linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
-      background-size:72px 72px;
-      opacity:.05;
-      pointer-events:none;
-      mask-image:radial-gradient(circle at 50% 25%, black 0%, transparent 70%);
-    }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(1200px 700px at 50% -10%, #15161c 0%, var(--bg) 55%),
+    linear-gradient(180deg, var(--bg), var(--bg2));
+  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  letter-spacing:.2px;
+  line-height:1.6;
+}
 
-    .wrap{
-      max-width:1180px;
-      margin:auto;
-      padding: var(--wrapTop) var(--padX) var(--wrapBottom);
-    }
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background:
+    linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size:80px 80px;
+  opacity:.05;
+  pointer-events:none;
+  mask-image:radial-gradient(circle at 50% 20%, black 0%, transparent 70%);
+}
 
-    /* top bar */
-    .topbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap: 18px;
-      padding:14px 18px;
-      border:1px solid var(--line);
-      border-radius:999px;
-      background:rgba(10,10,11,.6);
-      backdrop-filter:blur(10px);
-      position:sticky;top:16px;z-index:50;
-    }
-    .topbar span{
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:3px;
-      text-transform:uppercase;
-      color:var(--muted)
-    }
-    .topbar a{
-      color:var(--muted);
-      text-decoration:none;
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:3px;
-      text-transform:uppercase;
-      padding:8px 12px;
-      border-radius:999px;
-    }
-    .topbar a:hover{color:var(--text)}
+.wrap{
+  max-width:var(--wrap);
+  margin:auto;
+  padding:40px var(--pad) 140px;
+}
 
-    /* hero */
-    .hero{
-      text-align:center;
-      padding: var(--heroTop) 16px var(--heroBottom);
-      position:relative;
-    }
-    .logoWrap{
-      width:200px;height:200px;margin:auto;
-      border-radius:36px;
-      border:1px solid rgba(255,255,255,.12);
-      background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
-      box-shadow:0 34px 110px var(--shadow);
-      display:grid;place-items:center;
-      overflow:hidden;
-    }
-    .logo{
-      width:136px;
-      filter:drop-shadow(0 22px 44px rgba(0,0,0,.7));
-      animation:float 6s ease-in-out infinite;
-    }
-    @keyframes float{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-6px)}
-    }
+/* TOP BAR */
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 20px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(10,10,12,.7);
+  backdrop-filter:blur(10px);
+  position:sticky;top:16px;z-index:10;
+}
+.topbar span{
+  font-size:11px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:700;
+}
+.topbar a{
+  margin-left:16px;
+  text-decoration:none;
+  color:var(--muted);
+  font-size:11px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  font-weight:700;
+}
+.topbar a:hover{color:var(--text)}
 
-    .brand{
-      margin-top:30px;
-      font-size:54px;
-      font-weight:900;
-      letter-spacing:20px;
-      text-transform:uppercase;
-    }
-    .tagline{
-      margin-top:14px;
-      color:var(--muted);
-      font-size:13px;
-      font-weight:700;
-      letter-spacing:3.8px;
-      text-transform:uppercase;
-      max-width: 760px;
-      margin-left:auto;
-      margin-right:auto;
-    }
+/* HERO */
+.hero{
+  text-align:center;
+  padding:var(--heroTop) 12px var(--heroBottom);
+}
+.logo-shell{
+  width:210px;height:210px;
+  margin:auto;
+  border-radius:38px;
+  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+  display:grid;place-items:center;
+  box-shadow:0 40px 120px rgba(0,0,0,.8);
+}
+.logo-shell img{
+  width:140px;
+  animation:float 6s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-7px)}
+}
 
-    .heroActions{
-      margin-top:32px;
-      display:flex;
-      justify-content:center;
-      gap:14px;
-      flex-wrap:wrap;
-    }
-    .btn{
-      padding:12px 18px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      text-decoration:none;
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:3px;
-      text-transform:uppercase;
-    }
-    .btn:hover{background:rgba(255,255,255,.08)}
+.wordmark{
+  margin-top:34px;
+  font-size:56px;
+  font-weight:900;
+  letter-spacing:22px;
+  text-transform:uppercase;
+}
+.subline{
+  margin-top:16px;
+  font-size:12px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--muted);
+  max-width:760px;
+  margin-left:auto;margin-right:auto;
+}
 
-    /* sections */
-    section{
-      margin-top: var(--sectionTop);
-      border-top:1px solid var(--line);
-      padding-top: var(--sectionPadTop);
-    }
-    h2{
-      font-size:22px;
-      font-weight:800;
-      letter-spacing:8px;
-      text-transform:uppercase;
-      margin-bottom:26px;
-    }
-    p{
-      max-width:880px;
-      color:var(--muted);
-      margin-bottom: var(--stack);
-      font-size:15.7px;
-      line-height:1.7;
-      margin-left:auto;
-      margin-right:auto;
-    }
+.hero-actions{
+  margin-top:38px;
+  display:flex;
+  justify-content:center;
+  gap:16px;
+}
+.btn{
+  padding:13px 20px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.04);
+  color:var(--text);
+  font-size:11px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  font-weight:700;
+  text-decoration:none;
+}
+.btn:hover{background:rgba(255,255,255,.08)}
 
-    /* cards */
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(12,1fr);
-      gap:16px;
-      margin-top:34px;
-    }
-    .card{
-      grid-column:span 4;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:20px 18px 22px;
-      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.012));
-    }
-    .card b{
-      display:block;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:3px;
-      text-transform:uppercase;
-      margin-bottom:12px;
-    }
-    .card span{
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.65;
-    }
+/* SECTIONS */
+section{
+  margin-top:var(--sectionTop);
+  padding-top:80px;
+  border-top:1px solid var(--line);
+}
+h2{
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:8px;
+  text-transform:uppercase;
+  text-align:center;
+  margin-bottom:34px;
+}
+p{
+  max-width:860px;
+  margin:0 auto 24px;
+  color:var(--muted);
+  font-size:15.5px;
+}
 
-    /* logos */
-    .logo-row{
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:30px;
-      margin-top:34px;
-      align-items:center;
-    }
-    .logo-row img{
-      height:40px;
-      filter:grayscale(100%);
-      opacity:.92;
-    }
+/* ABOUT GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:18px;
+  margin-top:40px;
+}
+.card{
+  grid-column:span 4;
+  padding:22px 20px;
+  border-radius:18px;
+  border:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+}
+.card b{
+  display:block;
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+.card span{
+  color:var(--muted);
+  font-size:14px;
+}
 
-    /* contact tightening */
-    #contact p{
-      margin-bottom: 26px;
-    }
+/* LOGO ROWS */
+.logo-row{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:34px;
+  margin-top:36px;
+}
+.logo-row img{
+  height:38px;
+  filter:grayscale(100%);
+  opacity:.95;
+}
 
-    footer{
-      margin-top:110px;
-      border-top:1px solid var(--line);
-      padding-top:56px;
-      text-align:center;
-      color:var(--muted);
-      font-size:13px;
-      font-weight:600;
-      letter-spacing:2px;
-    }
-    footer p{
-      margin-bottom: 22px;
-    }
-    footer img{
-      height:30px;
-      margin:0 14px;
-      filter:grayscale(100%);
-      opacity:.92;
-    }
+/* FOOTER */
+footer{
+  margin-top:120px;
+  padding-top:60px;
+  border-top:1px solid var(--line);
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  letter-spacing:2px;
+}
+footer img{
+  height:30px;
+  margin:14px;
+  filter:grayscale(100%);
+}
 
-    /* reveal */
-    .reveal{opacity:0;transform:translateY(14px);transition:.7s ease}
-    .reveal.on{opacity:1;transform:none}
-
-    @media(max-width:900px){
-      :root{
-        --padX: 18px;
-        --heroTop: 96px;
-        --sectionTop: 74px;
-        --sectionPadTop: 62px;
-      }
-      .brand{font-size:34px;letter-spacing:11px}
-      .logoWrap{width:176px;height:176px;border-radius:32px}
-      .logo{width:122px}
-      .grid{gap:14px}
-      .card{grid-column:span 12}
-      p{line-height:1.75}
-    }
-  </style>
+/* RESPONSIVE */
+@media(max-width:900px){
+  .wordmark{font-size:36px;letter-spacing:12px}
+  .logo-shell{width:180px;height:180px}
+  .logo-shell img{width:120px}
+  .grid{grid-template-columns:1fr}
+  .card{grid-column:span 12}
+}
+</style>
 </head>
 
 <body>
 <div class="wrap">
 
-  <div class="topbar">
-    <span>Owner-Led • Enterprise Service</span>
-    <div>
-      <a href="#about">About</a>
-      <a href="#expertise">Expertise</a>
-      <a href="#contact">Contact</a>
-    </div>
+<div class="topbar">
+  <span>Owner-Led • Enterprise Service</span>
+  <div>
+    <a href="#about">About</a>
+    <a href="#expertise">Expertise</a>
+    <a href="#contact">Contact</a>
   </div>
-
-  <div class="hero reveal">
-    <div class="logoWrap">
-      <img src="assets/rizo-tech-logo.png" class="logo" alt="Rizo Tech Logo">
-    </div>
-    <div class="brand">R I Z O&nbsp;&nbsp;T E C H</div>
-    <div class="tagline">Frozen Beverage + Ice Machines • Southern California</div>
-
-    <div class="heroActions">
-      <a class="btn" href="mailto:rizotech@outlook.com">Email Rizo Tech</a>
-      <a class="btn" href="#expertise">View Equipment</a>
-    </div>
-  </div>
-
-  <section id="about" class="reveal">
-    <h2>About</h2>
-    <p>
-      Rizo Tech is a family-run service company built by technicians who never left the field.
-      We specialize exclusively in frozen beverage dispensers and ice machines for high-volume,
-      multi-location operators.
-    </p>
-    <p>
-      We don’t chase small one-off calls. We maintain large contracts where uptime, accountability,
-      and technical depth matter. The owners are on site verifying work and eliminating callbacks.
-    </p>
-
-    <div class="grid">
-      <div class="card"><b>Owner Technicians</b><span>The people accountable are the people on site. No handoffs. No excuses.</span></div>
-      <div class="card"><b>100+ Location Focus</b><span>Built for enterprise-scale operations where downtime is money.</span></div>
-      <div class="card"><b>Performance First</b><span>Low callbacks. Verified repairs. Predictable service standards.</span></div>
-    </div>
-  </section>
-
-  <section id="expertise" class="reveal">
-    <h2>Equipment Expertise</h2>
-    <p>We service and install frozen beverage and ice systems across major commercial platforms.</p>
-    <div class="logo-row">
-      <img src="assets/brand-cornelius.png" alt="Cornelius">
-      <img src="assets/brand-servend.png" alt="Servend">
-      <img src="assets/brand-schaerer.png" alt="Schaerer">
-      <img src="assets/brand-manitowoc.png" alt="Manitowoc">
-      <img src="assets/brand-curtis.png" alt="Curtis">
-      <img src="assets/brand-icee.png" alt="ICEE">
-    </div>
-  </section>
-
-  <section id="contact" class="reveal">
-    <h2>Contact</h2>
-    <p>Southern California • Enterprise Contracts Only</p>
-    <a class="btn" href="mailto:rizotech@outlook.com">rizotech@outlook.com</a>
-  </section>
-
-  <footer class="reveal">
-    <p>Partnered With</p>
-    <img src="assets/partner-smuckers.png" alt="Smuckers">
-    <img src="assets/partner-gm.png" alt="G&amp;M">
-    <img src="assets/partner-conoco.png" alt="Conoco">
-  </footer>
-
 </div>
 
-<script>
-  const io=new IntersectionObserver(e=>{
-    e.forEach(i=>{if(i.isIntersecting)i.target.classList.add('on')})
-  },{threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-</script>
+<div class="hero">
+  <div class="logo-shell">
+    <img src="assets/rizo-tech-logo.png" alt="Rizo Tech Logo">
+  </div>
+
+  <div class="wordmark">R I Z O&nbsp;&nbsp;T E C H</div>
+  <div class="subline">
+    Frozen Beverage Dispensers & Ice Machines • Southern California
+  </div>
+
+  <div class="hero-actions">
+    <a class="btn" href="mailto:rizotech@outlook.com">Email Rizo Tech</a>
+    <a class="btn" href="#expertise">Equipment</a>
+  </div>
+</div>
+
+<section id="about">
+<h2>About</h2>
+<p>
+Rizo Tech is a family-run refrigeration service company built by technicians who never left the field.
+We specialize exclusively in frozen beverage dispensers and ice machines for large, multi-location operators.
+</p>
+<p>
+We don’t chase small one-off calls. We support enterprise contracts where uptime, accountability, and
+deep technical knowledge are non-negotiable. The owners are the technicians—on site, verifying work,
+eliminating callbacks, and protecting performance.
+</p>
+
+<div class="grid">
+  <div class="card"><b>Owner Technicians</b><span>The people responsible are the people on the job.</span></div>
+  <div class="card"><b>Enterprise Focus</b><span>Built for 100+ machine and multi-location operations.</span></div>
+  <div class="card"><b>Reliability First</b><span>Low callbacks. Verified repairs. Predictable results.</span></div>
+</div>
+</section>
+
+<section id="expertise">
+<h2>Equipment Expertise</h2>
+<p>Frozen beverage dispensers and ice systems across major commercial platforms.</p>
+
+<div class="logo-row">
+  <img src="assets/brand-cornelius.png">
+  <img src="assets/brand-servend.png">
+  <img src="assets/brand-schaerer.png">
+  <img src="assets/brand-manitowoc.png">
+  <img src="assets/brand-curtis.png">
+  <img src="assets/brand-icee.png">
+</div>
+</section>
+
+<section id="contact">
+<h2>Contact</h2>
+<p>Southern California • Enterprise Contracts Only</p>
+<div style="text-align:center">
+  <a class="btn" href="mailto:rizotech@outlook.com">rizotech@outlook.com</a>
+</div>
+</section>
+
+<footer>
+<p>Partnered With</p>
+<img src="assets/partner-smuckers.png">
+<img src="assets/partner-gm.png">
+<img src="assets/partner-conoco.png">
+</footer>
+
+</div>
 </body>
 </html>
