@@ -3,57 +3,54 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Rizo Tech — Frozen Beverage & Ice Systems</title>
+<title>Rizo Tech — Refrigeration Service</title>
 
 <style>
 :root{
   --bg:#050506;
   --bg2:#0a0b0d;
-  --panel:rgba(255,255,255,.035);
-  --line:rgba(255,255,255,.10);
   --text:#f2f2f4;
   --muted:#a7a9b2;
-  --shadow: rgba(0,0,0,.75);
-
-  --wrap:1180px;
-  --pad:18px;
-
+  --line:rgba(255,255,255,.10);
+  --shadow: rgba(0,0,0,.80);
   --ease:cubic-bezier(.2,.8,.2,1);
+  --wrap:1100px;
+  --pad:18px;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   background:
-    radial-gradient(1100px 680px at 50% -12%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 58%),
-    radial-gradient(800px 520px at 18% 18%, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 62%),
-    radial-gradient(800px 520px at 86% 24%, rgba(255,255,255,.04) 0%, rgba(255,255,255,0) 62%),
+    radial-gradient(1100px 660px at 50% -12%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 60%),
+    radial-gradient(760px 460px at 18% 18%, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 62%),
+    radial-gradient(760px 460px at 86% 24%, rgba(255,255,255,.04) 0%, rgba(255,255,255,0) 62%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
   color:var(--text);
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-feature-settings:"ss01","cv01","cv02";
   letter-spacing:.12px;
-  line-height:1.6;
+  line-height:1.65;
   overflow-x:hidden;
 }
 
-/* Premium grid + noise (very subtle) */
+/* premium grid + light noise (subtle) */
 body::before{
   content:"";
   position:fixed;inset:0;
   background:
     linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size:92px 92px;
-  opacity:.045;
+  background-size:96px 96px;
+  opacity:.04;
   pointer-events:none;
-  mask-image:radial-gradient(circle at 50% 18%, black 0%, transparent 74%);
+  mask-image:radial-gradient(circle at 50% 18%, black 0%, transparent 76%);
 }
 body::after{
   content:"";
   position:fixed;inset:0;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.20'/%3E%3C/svg%3E");
-  opacity:.045;
+  opacity:.04;
   pointer-events:none;
   mix-blend-mode:overlay;
 }
@@ -61,22 +58,24 @@ body::after{
 .wrap{
   max-width:var(--wrap);
   margin:auto;
-  padding:18px var(--pad) 56px;
+  padding:18px var(--pad) 44px;
 }
 
-/* Topbar */
+/* topbar */
 .topbar{
-  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
   padding:12px 14px;
   border:1px solid var(--line);
   border-radius:999px;
   background:rgba(10,10,12,.72);
   backdrop-filter:blur(12px);
-  position:sticky;top:12px;z-index:20;
-  box-shadow:0 22px 80px rgba(0,0,0,.45);
+  position:sticky;top:12px;z-index:10;
+  box-shadow:0 18px 70px rgba(0,0,0,.45);
 }
 .topbar .left{
-  display:flex;align-items:center;gap:10px;
   font-size:11px;
   letter-spacing:3px;
   text-transform:uppercase;
@@ -84,10 +83,8 @@ body::after{
   font-weight:900;
   white-space:nowrap;
 }
-.dot{
-  width:8px;height:8px;border-radius:999px;
-  background:rgba(255,255,255,.20);
-  box-shadow:0 0 0 6px rgba(255,255,255,.03);
+.topbar .right{
+  display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;
 }
 .topbar a{
   text-decoration:none;
@@ -107,38 +104,38 @@ body::after{
   background:rgba(255,255,255,.03);
 }
 
-/* HERO */
+/* hero */
 .hero{
   text-align:center;
-  padding:58px 8px 28px; /* SHORTER */
+  padding:56px 8px 22px; /* SHORT */
   position:relative;
 }
-.hero::before{
+.heroGlow{
   content:"";
-  position:absolute;left:50%;top:-40px;transform:translateX(-50%);
-  width:min(920px, 94vw);height:420px;
-  background:radial-gradient(circle at 50% 35%, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 68%);
+  position:absolute;left:50%;top:-30px;transform:translateX(-50%);
+  width:min(880px, 94vw);
+  height:380px;
+  background:radial-gradient(circle at 50% 35%, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 70%);
   opacity:.55;
   pointer-events:none;
 }
-
-/* Million-dollar emblem shell */
 .logo-shell{
-  width:240px;height:240px; /* bigger */
+  width:220px;height:220px;
   margin:0 auto;
-  border-radius:54px;
+  border-radius:52px;
   border:1px solid rgba(255,255,255,.16);
   background:
     radial-gradient(circle at 40% 25%, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 62%),
     linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
   box-shadow:
-    0 50px 160px rgba(0,0,0,.90),
+    0 44px 140px rgba(0,0,0,.90),
     inset 0 0 0 1px rgba(255,255,255,.06);
   position:relative;
   display:grid;
   place-items:center;
   overflow:hidden;
   transform: translateZ(0);
+  transition: transform .18s var(--ease);
 }
 .logo-shell::after{
   content:"";
@@ -148,33 +145,32 @@ body::after{
     rgba(255,255,255,.20),
     rgba(255,255,255,0)
   );
-  opacity:.16;
-  animation: spin 11s linear infinite;
+  opacity:.14;
+  animation:spin 12s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
 
 .logo-shell img{
-  width:156px;
+  width:150px;
   filter: drop-shadow(0 26px 60px rgba(0,0,0,.85));
   position:relative;z-index:2;
-  animation: precision 6.2s var(--ease) infinite;
+  animation:float 6.2s var(--ease) infinite;
 }
-@keyframes precision{
+@keyframes float{
   0%,100%{transform:translateY(0) rotate(0deg)}
-  50%{transform:translateY(-5px) rotate(.4deg)}
+  50%{transform:translateY(-5px) rotate(.35deg)}
 }
 
-/* Brutalist wordmark */
 .wordmark{
-  margin-top:22px;
-  font-size:46px;
+  margin-top:20px;
+  font-size:44px;
   font-weight:950;
-  letter-spacing:18px; /* R I Z O  T E C H */
+  letter-spacing:18px;
   text-transform:uppercase;
   line-height:1.05;
 }
 .subline{
-  margin-top:12px;
+  margin-top:10px;
   font-size:12px;
   letter-spacing:4px;
   text-transform:uppercase;
@@ -182,10 +178,12 @@ body::after{
   max-width:860px;
   margin-left:auto;margin-right:auto;
 }
-
 .actions{
-  margin-top:18px; /* shorter */
-  display:flex;justify-content:center;flex-wrap:wrap;gap:10px;
+  margin-top:16px;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
 }
 .btn{
   padding:12px 16px;
@@ -199,7 +197,6 @@ body::after{
   font-weight:900;
   text-decoration:none;
   transition:all .18s var(--ease);
-  display:inline-flex;align-items:center;gap:10px;
 }
 .btn:hover{background:rgba(255,255,255,.08);transform:translateY(-1px)}
 .btn.ghost{
@@ -209,93 +206,31 @@ body::after{
 }
 .btn.ghost:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
 
-/* Compact sections */
+/* minimal sections */
 .section{
-  margin-top:38px;            /* SHORTER */
-  padding-top:30px;           /* SHORTER */
+  margin-top:26px;           /* SHORT */
+  padding-top:18px;          /* SHORT */
   border-top:1px solid rgba(255,255,255,.10);
 }
 h2{
-  font-size:16px;             /* tighter */
+  font-size:14px;
   font-weight:950;
   letter-spacing:8px;
   text-transform:uppercase;
   text-align:center;
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
 p{
   max-width:920px;
-  margin:0 auto 14px;         /* SHORTER */
+  margin:0 auto 12px;
   color:var(--muted);
   font-size:15px;
 }
 
-/* Credibility strip (compressed) */
-.cred{
-  max-width:980px;
-  margin:18px auto 0;
-  border:1px solid rgba(255,255,255,.10);
-  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-  border-radius:20px;
-  padding:14px 14px;
-  display:grid;
-  grid-template-columns:repeat(12,1fr);
-  gap:10px;
-}
-.cred .item{
-  grid-column:span 4;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:16px;
-  padding:12px 12px;
-  background:rgba(0,0,0,.10);
-}
-.cred .num{
-  font-size:18px;
-  font-weight:950;
-  letter-spacing:.6px;
-  color:var(--text);
-}
-.cred .lbl{
-  margin-top:6px;
-  font-size:10px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  color:var(--muted);
-  font-weight:950;
-}
-
-/* Cards (compressed) */
-.grid{
-  max-width:980px;
-  margin:14px auto 0;
-  display:grid;
-  grid-template-columns:repeat(12,1fr);
-  gap:10px;
-}
-.card{
-  grid-column:span 4;
-  padding:14px 14px;
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,.10);
-  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-  box-shadow:0 24px 80px rgba(0,0,0,.30);
-  transition:transform .18s var(--ease), border-color .18s var(--ease);
-}
-.card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.16)}
-.card b{
-  display:block;
-  font-size:11px;
-  font-weight:950;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  margin-bottom:10px;
-}
-.card span{color:var(--muted);font-size:13.5px;line-height:1.55}
-
-/* Brand logos — SHOW TRUE COLOR */
+/* brand rows (TRUE COLOR) */
 .logo-row{
   max-width:980px;
-  margin:16px auto 0;
+  margin:14px auto 0;
   display:flex;
   justify-content:center;
   flex-wrap:wrap;
@@ -303,22 +238,17 @@ p{
   align-items:center;
 }
 .logo-row img{
-  height:38px;
+  height:36px;
   opacity:.98;
-  filter:none;               /* IMPORTANT: true color */
+  filter:none;
   transition:transform .18s var(--ease), opacity .18s var(--ease);
 }
 .logo-row img:hover{transform:translateY(-2px);opacity:1}
 
-/* Contact compact */
+/* contact compact */
 .contact{
-  max-width:980px;
-  margin:16px auto 0;
-  border:1px solid rgba(255,255,255,.10);
-  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-  border-radius:20px;
-  padding:16px 14px;
   text-align:center;
+  margin-top:10px;
 }
 .mini{
   margin-top:10px;
@@ -330,10 +260,10 @@ p{
 }
 .copy{cursor:pointer}
 
-/* Footer — TRUE COLOR */
+/* footer compact */
 footer{
-  margin-top:28px;           /* SHORTER */
-  padding-top:22px;          /* SHORTER */
+  margin-top:26px;
+  padding-top:18px;
   border-top:1px solid rgba(255,255,255,.10);
   text-align:center;
   color:var(--muted);
@@ -351,34 +281,28 @@ footer .partner-row{
   align-items:center;
 }
 footer img{
-  height:28px;
+  height:26px;
   opacity:.98;
-  filter:none;               /* IMPORTANT: true color */
+  filter:none;
   transition:transform .18s var(--ease), opacity .18s var(--ease);
 }
 footer img:hover{transform:translateY(-2px);opacity:1}
 
-/* Reveal */
-.reveal{opacity:0;transform:translateY(10px);transition:opacity .65s var(--ease), transform .65s var(--ease)}
+/* reveal */
+.reveal{opacity:0;transform:translateY(8px);transition:opacity .55s var(--ease), transform .55s var(--ease)}
 .reveal.on{opacity:1;transform:none}
 
-/* Mobile tightening */
+/* mobile */
 @media(max-width:980px){
   .wordmark{font-size:34px;letter-spacing:12px}
-  .logo-shell{width:220px;height:220px;border-radius:46px}
-  .logo-shell img{width:145px}
-  .cred .item{grid-column:span 6}
-  .grid{gap:10px}
-  .card{grid-column:span 12}
+  .logo-shell{width:200px;height:200px;border-radius:46px}
+  .logo-shell img{width:140px}
 }
 @media(max-width:520px){
   .topbar{flex-direction:column;align-items:flex-start;border-radius:20px}
-  .topbar .right{width:100%;display:flex;gap:10px;flex-wrap:wrap}
-  .topbar a{margin:0}
+  .topbar .right{width:100%;justify-content:flex-start}
   .wordmark{font-size:30px;letter-spacing:10px}
   .subline{letter-spacing:3.2px}
-  .cred{grid-template-columns:repeat(12,1fr)}
-  .cred .item{grid-column:span 12}
 }
 @media(prefers-reduced-motion: reduce){
   *{animation:none !important;transition:none !important}
@@ -390,10 +314,7 @@ footer img:hover{transform:translateY(-2px);opacity:1}
 <div class="wrap">
 
   <div class="topbar reveal">
-    <div class="left">
-      <span class="dot"></span>
-      <span>Owner-Led • Enterprise Service</span>
-    </div>
+    <div class="left">Rizo Tech</div>
     <div class="right">
       <a href="#about">About</a>
       <a href="#brands">Brands</a>
@@ -402,46 +323,36 @@ footer img:hover{transform:translateY(-2px);opacity:1}
   </div>
 
   <div class="hero reveal">
+    <div class="heroGlow"></div>
+
     <div class="logo-shell">
       <img src="assets/rizo-tech-logo.png" alt="Rizo Tech Logo">
     </div>
 
     <div class="wordmark">R I Z O&nbsp;&nbsp;T E C H</div>
-    <div class="subline">Frozen Beverage Dispensers & Ice Machines • Southern California</div>
+    <div class="subline">Frozen Beverage Dispensers • Ice Machines • Southern California</div>
 
     <div class="actions">
-      <a class="btn" href="mailto:rizotech@outlook.com">Email Rizo Tech</a>
-      <a class="btn ghost" href="#contact">Enterprise Only</a>
+      <a class="btn" href="mailto:rizotech@outlook.com">Email</a>
+      <a class="btn ghost" href="#contact">Contact</a>
     </div>
   </div>
 
   <div id="about" class="section reveal">
     <h2>About</h2>
     <p>
-      Rizo Tech is a family-run service team built by technicians who never left the field.
-      We specialize exclusively in frozen beverage dispensers and ice machines for high-volume, multi-location operators.
+      Rizo Tech provides commercial refrigeration service and installation across Southern California,
+      specializing in frozen beverage dispensers and ice machines.
     </p>
     <p>
-      We don’t chase small one-off calls. We protect large contracts where uptime, accountability, and verified performance matter.
-      The owners are the technicians—on site, solving the issue and validating the fix.
+      Our team delivers consistent technical service, fast response, and reliable performance across
+      multi-location operations.
     </p>
-
-    <div class="cred">
-      <div class="item"><div class="num">Enterprise</div><div class="lbl">Contracts Only</div></div>
-      <div class="item"><div class="num">Owner</div><div class="lbl">On Site</div></div>
-      <div class="item"><div class="num">Low</div><div class="lbl">Callbacks</div></div>
-    </div>
-
-    <div class="grid">
-      <div class="card"><b>Owner-Technicians</b><span>Accountability is built in. No handoffs. No excuses.</span></div>
-      <div class="card"><b>Scale-Ready</b><span>Designed for 100+ machines and multi-location uptime.</span></div>
-      <div class="card"><b>Verified Repairs</b><span>Fix it right. Verify it. Protect the contract.</span></div>
-    </div>
   </div>
 
   <div id="brands" class="section reveal">
     <h2>Brands</h2>
-    <p>We service and install frozen beverage dispensers and ice machines across the major commercial platforms.</p>
+    <p>Service and installation across leading commercial platforms.</p>
 
     <div class="logo-row" aria-label="Brands">
       <img src="assets/brand-cornelius.png" alt="Cornelius">
@@ -456,7 +367,6 @@ footer img:hover{transform:translateY(-2px);opacity:1}
   <div id="contact" class="section reveal">
     <h2>Contact</h2>
     <div class="contact">
-      <p style="margin-bottom:10px;">Southern California • Enterprise Contracts Only</p>
       <a class="btn" href="mailto:rizotech@outlook.com">rizotech@outlook.com</a>
       <div class="mini"><span class="copy" id="copyEmail">Tap to copy email</span></div>
     </div>
@@ -474,13 +384,13 @@ footer img:hover{transform:translateY(-2px);opacity:1}
 </div>
 
 <script>
-/* scroll reveal */
+/* reveal */
 const io = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('on'); });
 },{threshold:0.16});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* micro parallax on logo (subtle) */
+/* subtle parallax on logo */
 const shell = document.querySelector('.logo-shell');
 window.addEventListener('mousemove', (e)=>{
   if(!shell) return;
@@ -489,13 +399,11 @@ window.addEventListener('mousemove', (e)=>{
   const cy = r.top + r.height/2;
   const dx = (e.clientX - cx) / r.width;
   const dy = (e.clientY - cy) / r.height;
-  const rx = (-dy * 5).toFixed(2);
-  const ry = (dx * 6).toFixed(2);
+  const rx = (-dy * 4).toFixed(2);
+  const ry = (dx * 5).toFixed(2);
   shell.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
 });
-window.addEventListener('mouseleave', ()=>{
-  if(shell) shell.style.transform = '';
-});
+window.addEventListener('mouseleave', ()=>{ if(shell) shell.style.transform=''; });
 
 /* copy email */
 const copyBtn = document.getElementById('copyEmail');
@@ -504,10 +412,10 @@ if(copyBtn){
     try{
       await navigator.clipboard.writeText('rizotech@outlook.com');
       copyBtn.textContent = 'Copied ✓';
-      setTimeout(()=>copyBtn.textContent='Tap to copy email', 1400);
+      setTimeout(()=>copyBtn.textContent='Tap to copy email', 1200);
     }catch{
       copyBtn.textContent = 'Copy failed';
-      setTimeout(()=>copyBtn.textContent='Tap to copy email', 1400);
+      setTimeout(()=>copyBtn.textContent='Tap to copy email', 1200);
     }
   });
 }
