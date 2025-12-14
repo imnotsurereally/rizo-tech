@@ -1,424 +1,490 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Rizo Tech — Refrigeration Service</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Rizo Tech — Frozen Beverage & Ice Machines</title>
+  <meta name="description" content="Owner-led commercial service specializing in frozen beverage dispensers and ice machines across Southern California." />
 
-<style>
-:root{
-  --bg:#050506;
-  --bg2:#0a0b0d;
-  --text:#f2f2f4;
-  --muted:#a7a9b2;
-  --line:rgba(255,255,255,.10);
-  --shadow: rgba(0,0,0,.80);
-  --ease:cubic-bezier(.2,.8,.2,1);
-  --wrap:1100px;
-  --pad:18px;
-}
+  <!-- Font (clean + slightly brutalist) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  background:
-    radial-gradient(1100px 660px at 50% -12%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 60%),
-    radial-gradient(760px 460px at 18% 18%, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 62%),
-    radial-gradient(760px 460px at 86% 24%, rgba(255,255,255,.04) 0%, rgba(255,255,255,0) 62%),
-    linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
-  color:var(--text);
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-feature-settings:"ss01","cv01","cv02";
-  letter-spacing:.12px;
-  line-height:1.65;
-  overflow-x:hidden;
-}
+  <style>
+    :root{
+      --bg:#070707;
+      --bg2:#0b0b0b;
+      --ink:#f2f2f2;
+      --muted:#b7b7b7;
+      --muted2:#8a8a8a;
+      --line:rgba(255,255,255,.10);
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --max: 1120px;
+      --radius: 18px;
+    }
 
-/* premium grid + light noise (subtle) */
-body::before{
-  content:"";
-  position:fixed;inset:0;
-  background:
-    linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
-  background-size:96px 96px;
-  opacity:.04;
-  pointer-events:none;
-  mask-image:radial-gradient(circle at 50% 18%, black 0%, transparent 76%);
-}
-body::after{
-  content:"";
-  position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.20'/%3E%3C/svg%3E");
-  opacity:.04;
-  pointer-events:none;
-  mix-blend-mode:overlay;
-}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Space Grotesk", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 65% -10%, rgba(255,255,255,.09), transparent 55%),
+                  radial-gradient(900px 600px at 10% 10%, rgba(255,255,255,.06), transparent 55%),
+                  linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--ink);
+      overflow-x:hidden;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
+    .row{display:flex; align-items:center; justify-content:space-between; gap:18px}
+    .stack{display:flex; flex-direction:column; gap:12px}
 
-.wrap{
-  max-width:var(--wrap);
-  margin:auto;
-  padding:18px var(--pad) 44px;
-}
+    /* Top nav (minimal) */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(7,7,7,.78), rgba(7,7,7,.35));
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      height:64px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .nav-left{display:flex; align-items:center; gap:12px}
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background:rgba(255,255,255,.75);
+      box-shadow:0 0 0 6px rgba(255,255,255,.04);
+    }
+    .brand{
+      display:flex; flex-direction:column; line-height:1.05;
+      letter-spacing:.18em; text-transform:uppercase; font-weight:700; font-size:13px;
+    }
+    .brand small{
+      letter-spacing:.14em; text-transform:none; font-weight:500; color:var(--muted);
+      font-size:12px; margin-top:2px;
+    }
+    .nav-right{display:flex; align-items:center; gap:10px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px;
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      color:var(--ink);
+      font-weight:600;
+      letter-spacing:.02em;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.24)}
+    .btn:active{transform:translateY(0px)}
+    .btn.primary{
+      background:rgba(255,255,255,.10);
+      border-color:rgba(255,255,255,.22);
+    }
 
-/* topbar */
-.topbar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  padding:12px 14px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  background:rgba(10,10,12,.72);
-  backdrop-filter:blur(12px);
-  position:sticky;top:12px;z-index:10;
-  box-shadow:0 18px 70px rgba(0,0,0,.45);
-}
-.topbar .left{
-  font-size:11px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  color:var(--muted);
-  font-weight:900;
-  white-space:nowrap;
-}
-.topbar .right{
-  display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;
-}
-.topbar a{
-  text-decoration:none;
-  color:var(--muted);
-  font-size:11px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  font-weight:900;
-  padding:8px 10px;
-  border-radius:999px;
-  border:1px solid transparent;
-  transition:all .18s var(--ease);
-}
-.topbar a:hover{
-  color:var(--text);
-  border-color:rgba(255,255,255,.12);
-  background:rgba(255,255,255,.03);
-}
+    /* Hero */
+    main{padding:44px 0 28px}
+    .hero{
+      padding:32px 0 10px;
+      position:relative;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:34px;
+      align-items:center;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      color:var(--muted);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:700;
+      font-size:12px;
+    }
+    .kicker .line{
+      width:54px; height:1px; background:rgba(255,255,255,.16);
+    }
+    h1{
+      margin:10px 0 10px;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height:1.02;
+      letter-spacing:-.03em;
+      font-weight:700;
+    }
+    .sub{
+      color:var(--muted);
+      font-size: clamp(15px, 2.1vw, 18px);
+      line-height:1.5;
+      max-width:52ch;
+      margin:0 0 16px;
+    }
 
-/* hero */
-.hero{
-  text-align:center;
-  padding:56px 8px 22px; /* SHORT */
-  position:relative;
-}
-.heroGlow{
-  content:"";
-  position:absolute;left:50%;top:-30px;transform:translateX(-50%);
-  width:min(880px, 94vw);
-  height:380px;
-  background:radial-gradient(circle at 50% 35%, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 70%);
-  opacity:.55;
-  pointer-events:none;
-}
-.logo-shell{
-  width:220px;height:220px;
-  margin:0 auto;
-  border-radius:52px;
-  border:1px solid rgba(255,255,255,.16);
-  background:
-    radial-gradient(circle at 40% 25%, rgba(255,255,255,.14) 0%, rgba(255,255,255,0) 62%),
-    linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
-  box-shadow:
-    0 44px 140px rgba(0,0,0,.90),
-    inset 0 0 0 1px rgba(255,255,255,.06);
-  position:relative;
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-  transform: translateZ(0);
-  transition: transform .18s var(--ease);
-}
-.logo-shell::after{
-  content:"";
-  position:absolute;inset:-90px;
-  background:conic-gradient(from 210deg,
-    rgba(255,255,255,0),
-    rgba(255,255,255,.20),
-    rgba(255,255,255,0)
-  );
-  opacity:.14;
-  animation:spin 12s linear infinite;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
+    /* Emblem: drama without “boxes” */
+    .emblemWrap{
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:320px;
+      isolation:isolate;
+    }
+    .glow{
+      position:absolute; inset:-10%;
+      background:
+        radial-gradient(420px 280px at 55% 40%, rgba(255,255,255,.20), transparent 60%),
+        radial-gradient(520px 360px at 45% 65%, rgba(255,255,255,.10), transparent 62%),
+        radial-gradient(700px 500px at 50% 50%, rgba(255,255,255,.06), transparent 65%);
+      filter: blur(10px);
+      opacity:.85;
+      z-index:0;
+      animation: breathe 7s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
 
-.logo-shell img{
-  width:150px;
-  filter: drop-shadow(0 26px 60px rgba(0,0,0,.85));
-  position:relative;z-index:2;
-  animation:float 6.2s var(--ease) infinite;
-}
-@keyframes float{
-  0%,100%{transform:translateY(0) rotate(0deg)}
-  50%{transform:translateY(-5px) rotate(.35deg)}
-}
+    .emblem{
+      width:min(440px, 92%);
+      aspect-ratio: 1 / 1;
+      position:relative;
+      z-index:2;
+      transform-style:preserve-3d;
+      filter: drop-shadow(0 24px 70px rgba(0,0,0,.55));
+      transition: transform .18s ease;
+    }
+    .emblem img{
+      width:100%; height:100%;
+      object-fit:contain;
+      display:block;
+      border-radius: 28px;
+    }
+    .sheen{
+      position:absolute; inset:0;
+      border-radius: 28px;
+      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.10) 50%, transparent 65%);
+      opacity:.0;
+      transform: translateX(-25%) translateY(8%) rotate(8deg);
+      transition: opacity .25s ease;
+      mix-blend-mode: screen;
+      pointer-events:none;
+    }
+    .emblem:hover .sheen{opacity:.65}
 
-.wordmark{
-  margin-top:20px;
-  font-size:44px;
-  font-weight:950;
-  letter-spacing:18px;
-  text-transform:uppercase;
-  line-height:1.05;
-}
-.subline{
-  margin-top:10px;
-  font-size:12px;
-  letter-spacing:4px;
-  text-transform:uppercase;
-  color:var(--muted);
-  max-width:860px;
-  margin-left:auto;margin-right:auto;
-}
-.actions{
-  margin-top:16px;
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:10px;
-}
-.btn{
-  padding:12px 16px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.18);
-  background:rgba(255,255,255,.04);
-  color:var(--text);
-  font-size:11px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  font-weight:900;
-  text-decoration:none;
-  transition:all .18s var(--ease);
-}
-.btn:hover{background:rgba(255,255,255,.08);transform:translateY(-1px)}
-.btn.ghost{
-  background:transparent;
-  border-color:rgba(255,255,255,.12);
-  color:var(--muted);
-}
-.btn.ghost:hover{color:var(--text);border-color:rgba(255,255,255,.18)}
+    /* Wordmark (spaced like “R I Z O  T E C H”) */
+    .wordmark{
+      margin-top:16px;
+      text-transform:uppercase;
+      font-weight:700;
+      letter-spacing:.58em; /* big spacing */
+      font-size: clamp(14px, 2.1vw, 18px);
+      color:rgba(255,255,255,.92);
+      filter: drop-shadow(0 10px 22px rgba(0,0,0,.55));
+    }
+    .wordmark span{letter-spacing:.58em}
+    .wordmark .gap{letter-spacing:.95em}
+    .wordmark .end{letter-spacing:0} /* avoid trailing space */
 
-/* minimal sections */
-.section{
-  margin-top:26px;           /* SHORT */
-  padding-top:18px;          /* SHORT */
-  border-top:1px solid rgba(255,255,255,.10);
-}
-h2{
-  font-size:14px;
-  font-weight:950;
-  letter-spacing:8px;
-  text-transform:uppercase;
-  text-align:center;
-  margin-bottom:12px;
-}
-p{
-  max-width:920px;
-  margin:0 auto 12px;
-  color:var(--muted);
-  font-size:15px;
-}
+    /* Sections */
+    section{padding:34px 0}
+    .rule{
+      height:1px; background:rgba(255,255,255,.08);
+      margin:14px 0 0;
+    }
 
-/* brand rows (TRUE COLOR) */
-.logo-row{
-  max-width:980px;
-  margin:14px auto 0;
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:22px;
-  align-items:center;
-}
-.logo-row img{
-  height:36px;
-  opacity:.98;
-  filter:none;
-  transition:transform .18s var(--ease), opacity .18s var(--ease);
-}
-.logo-row img:hover{transform:translateY(-2px);opacity:1}
+    .sectionTitle{
+      display:flex; align-items:baseline; justify-content:space-between; gap:16px;
+      margin-bottom:10px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size:13px;
+      letter-spacing:.40em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.75);
+      font-weight:700;
+    }
+    .sectionTitle p{
+      margin:0;
+      color:var(--muted2);
+      font-size:13px;
+      letter-spacing:.02em;
+    }
 
-/* contact compact */
-.contact{
-  text-align:center;
-  margin-top:10px;
-}
-.mini{
-  margin-top:10px;
-  font-size:11px;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  color:var(--muted);
-  font-weight:900;
-}
-.copy{cursor:pointer}
+    /* About: all text, no boxes */
+    .aboutText{
+      margin:0;
+      max-width: 82ch;
+      color:rgba(255,255,255,.86);
+      font-size: clamp(15px, 2vw, 17px);
+      line-height:1.65;
+    }
+    .aboutText strong{color:rgba(255,255,255,.96); font-weight:700}
 
-/* footer compact */
-footer{
-  margin-top:26px;
-  padding-top:18px;
-  border-top:1px solid rgba(255,255,255,.10);
-  text-align:center;
-  color:var(--muted);
-  font-size:11px;
-  letter-spacing:3px;
-  font-weight:900;
-  text-transform:uppercase;
-}
-footer .partner-row{
-  margin-top:12px;
-  display:flex;
-  justify-content:center;
-  gap:18px;
-  flex-wrap:wrap;
-  align-items:center;
-}
-footer img{
-  height:26px;
-  opacity:.98;
-  filter:none;
-  transition:transform .18s var(--ease), opacity .18s var(--ease);
-}
-footer img:hover{transform:translateY(-2px);opacity:1}
+    /* Brands strip (centered, real colors) */
+    .brands{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      gap: 18px 30px;
+      padding: 16px 0 0;
+    }
+    .brandLogo{
+      height: 34px;
+      width:auto;
+      max-width: 180px;
+      object-fit:contain;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.45));
+      opacity:.92;
+      transition: transform .16s ease, opacity .16s ease;
+    }
+    .brandLogo:hover{transform: translateY(-1px); opacity:1}
 
-/* reveal */
-.reveal{opacity:0;transform:translateY(8px);transition:opacity .55s var(--ease), transform .55s var(--ease)}
-.reveal.on{opacity:1;transform:none}
+    /* Contact (simple) */
+    .contact{
+      display:flex; flex-direction:column; gap:10px;
+      align-items:flex-start;
+    }
+    .contact .big{
+      font-size: clamp(20px, 3.4vw, 28px);
+      line-height:1.15;
+      letter-spacing:-.02em;
+      margin:0;
+      font-weight:700;
+    }
+    .contact .small{
+      margin:0;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:15px;
+      max-width: 70ch;
+    }
+    .pillRow{
+      display:flex; flex-wrap:wrap; gap:10px;
+      padding-top:6px;
+    }
+    .pill{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      border-radius:999px;
+      padding:9px 12px;
+      color:rgba(255,255,255,.88);
+      font-weight:600;
+      letter-spacing:.02em;
+      font-size:13px;
+    }
 
-/* mobile */
-@media(max-width:980px){
-  .wordmark{font-size:34px;letter-spacing:12px}
-  .logo-shell{width:200px;height:200px;border-radius:46px}
-  .logo-shell img{width:140px}
-}
-@media(max-width:520px){
-  .topbar{flex-direction:column;align-items:flex-start;border-radius:20px}
-  .topbar .right{width:100%;justify-content:flex-start}
-  .wordmark{font-size:30px;letter-spacing:10px}
-  .subline{letter-spacing:3.2px}
-}
-@media(prefers-reduced-motion: reduce){
-  *{animation:none !important;transition:none !important}
-}
-</style>
+    /* Partners (small, colored) */
+    .partnersRow{
+      display:flex; flex-wrap:wrap;
+      align-items:center; gap:12px 18px;
+      padding-top:14px;
+      color:var(--muted2);
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+    .partnersRow img{
+      height:22px; width:auto; object-fit:contain;
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,.45));
+      opacity:.95;
+    }
+
+    footer{
+      padding:22px 0 34px;
+      color:var(--muted2);
+      font-size:13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr; gap:18px}
+      .emblemWrap{min-height:260px}
+      .nav-right{gap:8px}
+    }
+    @media (max-width: 520px){
+      .btn{padding:9px 12px}
+      .brandLogo{height:30px; max-width: 160px}
+      .wordmark{letter-spacing:.48em}
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .glow{animation:none}
+      .btn, .brandLogo, .emblem{transition:none}
+    }
+  </style>
 </head>
 
 <body>
-<div class="wrap">
-
-  <div class="topbar reveal">
-    <div class="left">Rizo Tech</div>
-    <div class="right">
-      <a href="#about">About</a>
-      <a href="#brands">Brands</a>
-      <a href="#contact">Contact</a>
+  <header>
+    <div class="wrap nav">
+      <div class="nav-left">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="brand">
+          RIZO TECH
+          <small>Frozen Beverage + Ice Machines • SoCal</small>
+        </div>
+      </div>
+      <div class="nav-right">
+        <a class="btn" href="#brands">Brands</a>
+        <a class="btn primary" href="#contact">Email</a>
+      </div>
     </div>
-  </div>
+  </header>
 
-  <div class="hero reveal">
-    <div class="heroGlow"></div>
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero-grid">
+        <div class="stack">
+          <div class="kicker"><span class="line"></span> Commercial Service & Install</div>
+          <h1>Frozen beverage and ice machine support built for uptime.</h1>
+          <p class="sub">
+            We specialize in high-demand commercial systems—frozen beverage dispensers and ice machines—
+            with owner-led technicians on the work. Fast response, consistent outcomes, and accountability.
+          </p>
+          <div class="row" style="justify-content:flex-start; gap:10px; flex-wrap:wrap;">
+            <a class="btn primary" href="mailto:rizotech@outlook.com">rizotech@outlook.com</a>
+            <a class="btn" href="#about">About</a>
+          </div>
+          <div class="rule"></div>
+        </div>
 
-    <div class="logo-shell">
-      <img src="assets/rizo-tech-logo.png" alt="Rizo Tech Logo">
-    </div>
+        <div class="emblemWrap" aria-label="Rizo Tech emblem">
+          <div class="glow" aria-hidden="true"></div>
+          <div class="emblem" id="emblem">
+            <img src="assets/rizo-tech-logo.png" alt="Rizo Tech emblem (R with T inside)" loading="eager" />
+            <div class="sheen" aria-hidden="true"></div>
+          </div>
 
-    <div class="wordmark">R I Z O&nbsp;&nbsp;T E C H</div>
-    <div class="subline">Frozen Beverage Dispensers • Ice Machines • Southern California</div>
+          <div style="position:absolute; bottom:8px; left:50%; transform:translateX(-50%); text-align:center;">
+            <div class="wordmark" aria-label="R I Z O  T E C H">
+              <span>R I Z O</span><span class="gap"> </span><span>T E C H</span><span class="end"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <div class="actions">
-      <a class="btn" href="mailto:rizotech@outlook.com">Email</a>
-      <a class="btn ghost" href="#contact">Contact</a>
-    </div>
-  </div>
+    <!-- ABOUT (all text, no boxes) -->
+    <section id="about">
+      <div class="sectionTitle">
+        <h2>About</h2>
+        <p>Owner-led. Technical. Reliable.</p>
+      </div>
+      <p class="aboutText">
+        Rizo Tech is a family-run commercial refrigeration company built by four brothers.
+        We focus on <strong>frozen beverage dispensers</strong> and <strong>ice machines</strong>—the systems that can’t afford downtime.
+        Our owners are also field technicians, so the work gets handled with the same standards we expect on our own jobs:
+        clear diagnosis, correct repairs, and dependable performance across large, multi-location operations in Southern California.
+      </p>
+      <div class="rule"></div>
+    </section>
 
-  <div id="about" class="section reveal">
-    <h2>About</h2>
-    <p>
-      Rizo Tech provides commercial refrigeration service and installation across Southern California,
-      specializing in frozen beverage dispensers and ice machines.
-    </p>
-    <p>
-      Our team delivers consistent technical service, fast response, and reliable performance across
-      multi-location operations.
-    </p>
-  </div>
+    <!-- BRANDS -->
+    <section id="brands">
+      <div class="sectionTitle">
+        <h2>Brands</h2>
+        <p>Service + installation across leading commercial platforms.</p>
+      </div>
 
-  <div id="brands" class="section reveal">
-    <h2>Brands</h2>
-    <p>Service and installation across leading commercial platforms.</p>
+      <div class="brands" aria-label="Supported brands">
+        <!-- Robust logo loading: tries alternate filenames if one is missing -->
+        <img class="brandLogo" alt="Cornelius"  data-srcs="assets/brand-cornelius.png" />
+        <img class="brandLogo" alt="Servend"    data-srcs="assets/brand-servend.png,assets/brand-servend.webp,assets/brand-servend.jpg" />
+        <img class="brandLogo" alt="Schaerer"   data-srcs="assets/brand-schaerer.png" />
+        <img class="brandLogo" alt="Manitowoc"  data-srcs="assets/brand-manitowoc.png" />
+        <img class="brandLogo" alt="Curtis"     data-srcs="assets/brand-curtis.png,assets/brand-curtis.webp,assets/brand-curtis.jpg" />
+        <img class="brandLogo" alt="ICEE"       data-srcs="assets/brand-icee.png,assets/brand.icee.png" />
+      </div>
 
-    <div class="logo-row" aria-label="Brands">
-      <img src="assets/brand-cornelius.png" alt="Cornelius">
-      <img src="assets/brand-servend.png" alt="Servend">
-      <img src="assets/brand-schaerer.png" alt="Schaerer">
-      <img src="assets/brand-manitowoc.png" alt="Manitowoc">
-      <img src="assets/brand-curtis.png" alt="Curtis">
-      <img src="assets/brand-icee.png" alt="ICEE">
-    </div>
-  </div>
+      <div class="rule"></div>
+    </section>
 
-  <div id="contact" class="section reveal">
-    <h2>Contact</h2>
-    <div class="contact">
-      <a class="btn" href="mailto:rizotech@outlook.com">rizotech@outlook.com</a>
-      <div class="mini"><span class="copy" id="copyEmail">Tap to copy email</span></div>
-    </div>
-  </div>
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="sectionTitle">
+        <h2>Contact</h2>
+        <p>Southern California</p>
+      </div>
 
-  <footer class="reveal">
-    Partnered With
-    <div class="partner-row" aria-label="Partners">
-      <img src="assets/partner-smuckers.png" alt="Smuckers">
-      <img src="assets/partner-gm.png" alt="G&amp;M">
-      <img src="assets/partner-conoco.png" alt="Conoco">
-    </div>
-  </footer>
+      <div class="contact">
+        <p class="big">Email us.</p>
+        <p class="small">
+          For service, installation, or multi-location support, reach out and we’ll respond quickly.
+        </p>
+        <div class="pillRow" aria-label="Contact actions">
+          <a class="btn primary" href="mailto:rizotech@outlook.com">rizotech@outlook.com</a>
+          <a class="btn" href="#top">Back to top</a>
+        </div>
 
-</div>
+        <div class="partnersRow" aria-label="Partnered with">
+          <span>Partnered with</span>
+          <img src="assets/partner-smuckers.png" alt="Smuckers" loading="lazy">
+          <img src="assets/partner-gm.png" alt="G&amp;M" loading="lazy">
+          <img src="assets/partner-conoco.png" alt="Conoco" loading="lazy">
+        </div>
+      </div>
+    </section>
 
-<script>
-/* reveal */
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('on'); });
-},{threshold:0.16});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    <footer class="wrap" style="padding-left:0; padding-right:0;">
+      <div class="rule" style="margin:0 0 14px;"></div>
+      <div class="row" style="flex-wrap:wrap; justify-content:space-between;">
+        <div>© <span id="y"></span> Rizo Tech</div>
+        <div style="opacity:.9;">Frozen beverage dispensers • Ice machines • Commercial support</div>
+      </div>
+    </footer>
+  </main>
 
-/* subtle parallax on logo */
-const shell = document.querySelector('.logo-shell');
-window.addEventListener('mousemove', (e)=>{
-  if(!shell) return;
-  const r = shell.getBoundingClientRect();
-  const cx = r.left + r.width/2;
-  const cy = r.top + r.height/2;
-  const dx = (e.clientX - cx) / r.width;
-  const dy = (e.clientY - cy) / r.height;
-  const rx = (-dy * 4).toFixed(2);
-  const ry = (dx * 5).toFixed(2);
-  shell.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-});
-window.addEventListener('mouseleave', ()=>{ if(shell) shell.style.transform=''; });
+  <script>
+    // Year
+    document.getElementById("y").textContent = new Date().getFullYear();
 
-/* copy email */
-const copyBtn = document.getElementById('copyEmail');
-if(copyBtn){
-  copyBtn.addEventListener('click', async ()=>{
-    try{
-      await navigator.clipboard.writeText('rizotech@outlook.com');
-      copyBtn.textContent = 'Copied ✓';
-      setTimeout(()=>copyBtn.textContent='Tap to copy email', 1200);
-    }catch{
-      copyBtn.textContent = 'Copy failed';
-      setTimeout(()=>copyBtn.textContent='Tap to copy email', 1200);
-    }
-  });
-}
-</script>
+    // Subtle emblem tilt (micro, not cheesy)
+    (function(){
+      const el = document.getElementById("emblem");
+      if (!el) return;
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReduced) return;
+
+      el.addEventListener("mousemove", (e) => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = `rotateY(${x * 7}deg) rotateX(${(-y) * 7}deg) translateY(-1px)`;
+      });
+      el.addEventListener("mouseleave", () => {
+        el.style.transform = "rotateY(0deg) rotateX(0deg) translateY(0px)";
+      });
+    })();
+
+    // Robust brand logo loading (handles missing files / renamed ICEE file)
+    (function(){
+      const imgs = document.querySelectorAll("img[data-srcs]");
+      imgs.forEach(img => {
+        const srcs = (img.getAttribute("data-srcs") || "")
+          .split(",")
+          .map(s => s.trim())
+          .filter(Boolean);
+
+        let i = 0;
+        const tryNext = () => {
+          if (i >= srcs.length) {
+            // If nothing loads, hide cleanly (no broken icon)
+            img.style.display = "none";
+            return;
+          }
+          img.src = srcs[i++];
+        };
+        img.addEventListener("error", tryNext);
+        tryNext();
+      });
+    })();
+  </script>
 </body>
 </html>
