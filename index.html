@@ -3,366 +3,368 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#050505" />
-  <title>Rizo Tech</title>
-  <meta name="description" content="Rizo Tech — Frozen beverage dispensers and ice machines. Southern California." />
+  <title>RIZO TECH | Frozen Beverage + Ice Machines | Southern California</title>
+  <meta name="description" content="RIZO TECH. Commercial frozen beverage dispensers and ice machines. Southern California." />
 
-  <!-- Font: premium/brutal without looking “tech startup” -->
+  <!-- Premium, clean typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:opsz,wght@9..144,300;9..144,500&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#050505;
-      --ink:#f2f2f2;
-      --muted:rgba(255,255,255,.72);
-      --muted2:rgba(255,255,255,.56);
-      --line:rgba(255,255,255,.10);
-      --max: 980px;
+      --bg:#07080a;
+      --panel:#0b0d10;
+      --text:#e9eaee;
+      --muted:#a7abb6;
+      --hair:#1a1d24;
+      --soft:#0f1218;
+      --glow:rgba(255,255,255,.08);
+      --accent:#c9ccd6; /* quiet luxury silver */
+      --accent2:#8f97ab; /* cool slate */
+      --link:#e9eaee;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family:"Space Grotesk", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--ink);
       background:
-        radial-gradient(1000px 700px at 50% -10%, rgba(255,255,255,.08), transparent 55%),
-        radial-gradient(900px 600px at 20% 25%, rgba(255,255,255,.05), transparent 60%),
-        linear-gradient(180deg, #050505, #0b0b0b);
-      overflow-x:hidden;
+        radial-gradient(1100px 700px at 50% -10%, rgba(255,255,255,.08), transparent 60%),
+        radial-gradient(900px 600px at 10% 20%, rgba(255,255,255,.05), transparent 55%),
+        radial-gradient(900px 600px at 90% 30%, rgba(255,255,255,.04), transparent 55%),
+        linear-gradient(180deg, #050608 0%, #07080a 100%);
+      color:var(--text);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      letter-spacing:.2px;
     }
-    a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
 
-    /* Minimal top bar */
-    header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(180deg, rgba(5,5,5,.78), rgba(5,5,5,.28));
-      border-bottom:1px solid rgba(255,255,255,.06);
+    a{color:var(--link); text-decoration:none}
+    a:hover{opacity:.9}
+
+    .wrap{
+      max-width:980px;
+      margin:0 auto;
+      padding:28px 18px 80px;
     }
-    .nav{
-      height:64px;
-      display:flex; align-items:center; justify-content:center;
+
+    /* Top nav */
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:10px 0 18px;
     }
-    .nav-inner{
-      width:100%;
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      max-width:var(--max);
-      padding:0 22px;
+    .top .brand{
+      display:flex; align-items:center; gap:10px;
+      font-size:13px; letter-spacing:.28em;
+      text-transform:uppercase; color:var(--muted);
     }
-    .mark{
-      display:flex; flex-direction:column;
-      text-transform:uppercase;
-      letter-spacing:.22em;
-      font-weight:700;
-      font-size:13px;
-      line-height:1.05;
+    .top .dot{
+      width:6px; height:6px; border-radius:99px;
+      background:linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.15));
+      box-shadow:0 0 0 4px rgba(255,255,255,.03);
     }
-    .mark small{
-      text-transform:none;
-      letter-spacing:.12em;
-      font-weight:500;
-      color:var(--muted2);
-      font-size:12px;
-      margin-top:2px;
+    .top .right{
+      display:flex; gap:10px; align-items:center;
+      font-size:13px; color:var(--muted);
     }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:10px 14px;
-      border:1px solid rgba(255,255,255,.16);
+    .pill{
+      border:1px solid var(--hair);
+      background:rgba(255,255,255,.03);
+      padding:8px 10px;
       border-radius:999px;
-      background:rgba(255,255,255,.04);
-      color:var(--ink);
-      font-weight:600;
-      letter-spacing:.02em;
-      transition: transform .18s ease, background .18s ease, border-color .18s ease;
-      user-select:none;
-    }
-    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.24)}
-    .btn.primary{background:rgba(255,255,255,.10); border-color:rgba(255,255,255,.22)}
-
-    /* Centered, stacked layout */
-    main{padding:54px 0 40px; text-align:center}
-    .stack{display:flex; flex-direction:column; align-items:center}
-
-    .kicker{
-      display:inline-flex; align-items:center; gap:10px;
-      color:var(--muted2);
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      font-weight:700;
-      font-size:12px;
-    }
-    .kicker .line{
-      width:54px; height:1px; background:rgba(255,255,255,.14);
+      backdrop-filter: blur(6px);
     }
 
-    /* BIG logo, no “boxed” feel */
-    .heroLogo{
-      position:relative;
-      width:min(520px, 92vw);
-      margin:22px auto 10px;
-      filter: drop-shadow(0 28px 90px rgba(0,0,0,.65));
-      transform-style:preserve-3d;
-    }
-    .heroGlow{
-      position:absolute;
-      inset:-18%;
+    /* Hero */
+    .hero{
+      margin-top:10px;
+      padding:34px 16px 22px;
+      border:1px solid var(--hair);
+      border-radius:22px;
       background:
-        radial-gradient(420px 320px at 50% 45%, rgba(255,255,255,.18), transparent 62%),
-        radial-gradient(700px 520px at 50% 50%, rgba(255,255,255,.07), transparent 68%);
-      filter: blur(12px);
-      opacity:.85;
-      z-index:0;
-      pointer-events:none;
-      animation:breathe 8s ease-in-out infinite;
-    }
-    @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
-
-    .heroLogo img{
+        radial-gradient(900px 500px at 50% 0%, rgba(255,255,255,.06), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
       position:relative;
-      z-index:2;
-      width:100%;
+      overflow:hidden;
+      text-align:center;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 220px at 50% 10%, rgba(255,255,255,.10), transparent 65%),
+        radial-gradient(380px 220px at 10% 40%, rgba(255,255,255,.06), transparent 70%),
+        radial-gradient(380px 220px at 90% 40%, rgba(255,255,255,.05), transparent 70%);
+      pointer-events:none;
+      filter: blur(.2px);
+      opacity:.8;
+    }
+
+    .logoStage{
+      position:relative;
+      display:grid;
+      place-items:center;
+      gap:14px;
+      padding:10px 0 6px;
+    }
+
+    .emblem{
+      width:min(320px, 76vw);
       height:auto;
       display:block;
-      object-fit:contain;
-      /* IMPORTANT: no rounded corners so transparent PNG looks clean */
+      filter: drop-shadow(0 16px 36px rgba(0,0,0,.55));
+      transform-origin:center;
+      animation: float 7s ease-in-out infinite;
     }
-    .sheen{
-      position:absolute; inset:0;
-      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.10) 50%, transparent 65%);
-      opacity:.0;
-      transform: translateX(-25%) translateY(10%) rotate(8deg);
-      transition: opacity .25s ease;
-      mix-blend-mode: screen;
-      pointer-events:none;
-      z-index:3;
+    @keyframes float{
+      0%{transform:translateY(0) scale(1)}
+      50%{transform:translateY(-6px) scale(1.01)}
+      100%{transform:translateY(0) scale(1)}
     }
-    .heroLogo:hover .sheen{opacity:.6}
 
-    /* Wordmark spaced like you want */
     .wordmark{
-      margin-top:10px;
+      font-size:clamp(22px, 4.4vw, 34px);
+      letter-spacing:.32em;
       text-transform:uppercase;
-      font-weight:700;
-      letter-spacing:.62em;
-      font-size: clamp(14px, 2.2vw, 18px);
-      color:rgba(255,255,255,.92);
-      filter: drop-shadow(0 10px 22px rgba(0,0,0,.60));
+      color:rgba(233,234,238,.92);
+      text-shadow:0 10px 26px rgba(0,0,0,.45);
+      padding-left:.32em; /* keeps optical centering with big tracking */
+      margin:0;
     }
-    .wordmark .end{letter-spacing:0}
 
-    /* Clean, high-end copy */
-    h1{
-      margin:20px 0 8px;
-      font-size: clamp(24px, 3.8vw, 34px);
-      line-height:1.12;
-      letter-spacing:-.02em;
-      font-weight:700;
-    }
     .sub{
-      margin:0;
+      max-width:760px;
+      margin:10px auto 0;
       color:var(--muted);
-      font-size: clamp(15px, 2.1vw, 18px);
-      line-height:1.55;
-      max-width: 68ch;
-    }
-
-    .rule{
-      width:min(680px, 92vw);
-      height:1px;
-      background:rgba(255,255,255,.08);
-      margin:26px auto;
-    }
-
-    /* About: all text, centered */
-    .about{
-      width:min(820px, 92vw);
-      margin:0 auto;
-      text-align:center;
-    }
-    .about h2{
-      margin:0 0 10px;
-      font-size:12px;
-      letter-spacing:.38em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.70);
-      font-weight:700;
-    }
-    .about p{
-      margin:0;
-      color:rgba(255,255,255,.86);
-      font-size: clamp(15px, 2vw, 17px);
-      line-height:1.70;
-    }
-
-    /* Contact: simple, premium */
-    .contact{
-      width:min(820px, 92vw);
-      margin:0 auto;
-      text-align:center;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:10px;
-    }
-    .contact h2{
-      margin:0 0 2px;
-      font-size:12px;
-      letter-spacing:.38em;
-      text-transform:uppercase;
-      color:rgba(255,255,255,.70);
-      font-weight:700;
-    }
-    .contact .email{
-      font-size: clamp(18px, 2.8vw, 24px);
-      font-weight:700;
-      letter-spacing:-.01em;
-    }
-    .contact .note{
-      margin:0;
-      color:var(--muted);
+      font-size:15px;
       line-height:1.6;
-      max-width: 64ch;
     }
+
+    /* Luxury highlight line */
+    .lux{
+      margin-top:10px;
+      font-family:Fraunces, serif;
+      font-size:clamp(16px, 2.6vw, 20px);
+      line-height:1.5;
+      color:rgba(233,234,238,.92);
+    }
+    .lux .accent{
+      color:var(--accent);
+      text-shadow:0 0 20px rgba(255,255,255,.08);
+      border-bottom:1px solid rgba(255,255,255,.10);
+      padding-bottom:2px;
+      white-space:nowrap;
+    }
+
+    .actions{
+      margin-top:18px;
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      position:relative;
+      z-index:2;
+    }
+    .btn{
+      border-radius:999px;
+      padding:11px 14px;
+      border:1px solid var(--hair);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      font-size:13px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.14)}
+    .btn.primary{
+      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05));
+      border-color:rgba(255,255,255,.18);
+    }
+
+    /* Sections */
+    .section{
+      margin-top:18px;
+      padding:22px 18px;
+      border:1px solid var(--hair);
+      border-radius:20px;
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      text-align:center;
+    }
+    .kicker{
+      font-size:12px;
+      letter-spacing:.38em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin:0 0 10px 0;
+    }
+    .h2{
+      margin:0 0 10px;
+      font-size:22px;
+      letter-spacing:.02em;
+      font-weight:600;
+      color:rgba(233,234,238,.96);
+    }
+    .p{
+      margin:0 auto;
+      max-width:860px;
+      color:rgba(167,171,182,.98);
+      font-size:15px;
+      line-height:1.75;
+    }
+
+    /* Brands row (no "BRANDS" title) */
+    .logos{
+      margin-top:14px;
+      display:flex;
+      gap:18px;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+      padding:6px 0 2px;
+    }
+    .logoImg{
+      height:30px;
+      width:auto;
+      max-width:160px;
+      object-fit:contain;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+      opacity:.98; /* allow true color */
+      transition: transform .18s ease, opacity .18s ease;
+    }
+    .logoImg:hover{transform:translateY(-1px); opacity:1}
+
+    /* Partner strip */
     .partners{
       margin-top:12px;
       display:flex;
-      flex-wrap:wrap;
+      gap:14px;
       justify-content:center;
       align-items:center;
-      gap:12px 18px;
-      color:rgba(255,255,255,.55);
-      font-size:12px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
+      flex-wrap:wrap;
     }
-    .partners img{
-      height:22px;
-      width:auto;
-      object-fit:contain;
-      filter: drop-shadow(0 10px 16px rgba(0,0,0,.55));
-      opacity:.95;
-    }
+    .partnerImg{height:26px; width:auto; max-width:140px; object-fit:contain; opacity:.98}
 
-    footer{
-      padding:22px 0 0;
-      color:rgba(255,255,255,.48);
-      font-size:13px;
-      text-align:center;
+    /* Footer contact */
+    .contact{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
     }
+    .mail{
+      font-family:Fraunces, serif;
+      font-size:18px;
+      color:rgba(233,234,238,.96);
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.03);
+      padding:10px 14px;
+      border-radius:999px;
+      box-shadow:0 20px 46px rgba(0,0,0,.45);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .mail:hover{transform:translateY(-1px); background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.18)}
 
-    /* Responsive */
+    /* Responsive tightening */
     @media (max-width:520px){
-      .btn{padding:9px 12px}
-      .wordmark{letter-spacing:.52em}
-    }
-
-    /* Motion safety */
-    @media (prefers-reduced-motion: reduce){
-      .heroGlow{animation:none}
-      .btn, .heroLogo{transition:none}
+      .wrap{padding:18px 14px 70px}
+      .hero{padding:28px 12px 18px}
+      .logoImg{height:26px}
+      .partnerImg{height:24px}
+      .sub{font-size:14px}
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="nav">
-      <div class="nav-inner">
-        <div class="mark">
-          RIZO TECH
-          <small>Frozen Beverage + Ice Machines • SoCal</small>
-        </div>
-        <a class="btn primary" href="mailto:rizotech@outlook.com">Email</a>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>RIZO TECH</span>
+      </div>
+      <div class="right">
+        <span class="pill">Southern California</span>
+        <a class="pill" href="#contact">Contact</a>
       </div>
     </div>
-  </header>
 
-  <main class="wrap">
-    <div class="stack" id="top">
-      <div class="kicker"><span class="line"></span> Commercial Service & Installation <span class="line"></span></div>
+    <section class="hero" id="top">
+      <div class="logoStage">
+        <!-- Your logo image -->
+        <img class="emblem" src="assets/rizo-tech-logo.png" alt="Rizo Tech emblem" />
 
-      <div class="heroLogo" id="emblem" aria-label="Rizo Tech emblem">
-        <div class="heroGlow" aria-hidden="true"></div>
-        <!-- Replace with your transparent PNG later (same filename is fine) -->
-        <img src="assets/rizo-tech-logo.png" alt="Rizo Tech emblem (R with T inside)" loading="eager" />
-        <div class="sheen" aria-hidden="true"></div>
+        <!-- Spaced wordmark -->
+        <h1 class="wordmark">R I Z O&nbsp;&nbsp;T E C H</h1>
+
+        <p class="sub">
+          Commercial service and installation for frozen beverage dispensers and ice machines.
+          Fast response, consistent workmanship, and clean communication.
+        </p>
+
+        <p class="lux">
+          Built for operators who <span class="accent">demand uptime</span> and predictable performance.
+        </p>
+
+        <div class="actions">
+          <a class="btn primary" href="mailto:rizotech@outlook.com">Email</a>
+          <a class="btn" href="#about">About</a>
+          <a class="btn" href="#equipment">Equipment</a>
+        </div>
       </div>
+    </section>
 
-      <div class="wordmark" aria-label="R I Z O  T E C H">
-        R I Z O&nbsp;&nbsp;T E C H<span class="end"></span>
-      </div>
+    <section class="section" id="about">
+      <p class="kicker">About</p>
+      <h2 class="h2">Owner led field expertise</h2>
+      <p class="p">
+        RIZO TECH is a family run commercial refrigeration service team focused on frozen beverage dispensers and ice machines.
+        Our owners are also the technicians, so your equipment is handled by people who have built their careers in the field.
+        We support multi location operators across Southern California with straightforward pricing, strong documentation, and dependable results.
+      </p>
+    </section>
 
-      <h1>Frozen beverage dispensers and ice machines.</h1>
-      <p class="sub">
-        Owner-led field technicians serving commercial operators across Southern California.
-        Focused support, clear communication, and reliable performance where uptime matters.
+    <section class="section" id="equipment">
+      <p class="kicker">Equipment we support</p>
+      <h2 class="h2">Trusted platforms, serviced correctly</h2>
+      <p class="p">
+        Service and installation across leading commercial systems. Genuine parts practices and reliable commissioning.
       </p>
 
-      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center;">
-        <a class="btn primary" href="mailto:rizotech@outlook.com">rizotech@outlook.com</a>
-        <a class="btn" href="#about">About</a>
-        <a class="btn" href="#contact">Contact</a>
+      <!-- Use your uploaded assets (true color) -->
+      <div class="logos" aria-label="Supported brands">
+        <img class="logoImg" src="assets/brand-cornelius.png" alt="Cornelius" loading="lazy">
+        <img class="logoImg" src="assets/brand-servend.png" alt="Servend" loading="lazy" onerror="this.style.display='none'">
+        <img class="logoImg" src="assets/brand-schaerer.png" alt="Schaerer" loading="lazy">
+        <img class="logoImg" src="assets/brand-manitowoc.png" alt="Manitowoc" loading="lazy">
+        <img class="logoImg" src="assets/brand-curtis.png" alt="Curtis" loading="lazy" onerror="this.style.display='none'">
+        <img class="logoImg" src="assets/brand-icee.png" alt="ICEE" loading="lazy">
       </div>
+    </section>
 
-      <div class="rule"></div>
+    <section class="section" id="partners">
+      <p class="kicker">Partnered with</p>
+      <div class="partners" aria-label="Partners">
+        <img class="partnerImg" src="assets/partner-smuckers.png" alt="Smucker's" loading="lazy">
+        <img class="partnerImg" src="assets/partner-gm.png" alt="G&M" loading="lazy">
+        <img class="partnerImg" src="assets/partner-conoco.png" alt="Conoco" loading="lazy">
+      </div>
+    </section>
 
-      <section class="about" id="about">
-        <h2>About Us</h2>
-        <p>
-          Rizo Tech is a family-run refrigeration company built by four brothers with deep commercial experience.
-          We specialize in frozen beverage dispensers and ice machines—systems that can’t afford downtime.
-          The owners are also the technicians, so the work is diagnosed and completed with accountability and consistency
-          across multi-location operations throughout Southern California.
-        </p>
-      </section>
-
-      <div class="rule"></div>
-
-      <section class="contact" id="contact">
-        <h2>Contact</h2>
-        <div class="email"><a href="mailto:rizotech@outlook.com">rizotech@outlook.com</a></div>
-        <p class="note">Email us for service, installation, or ongoing support across multiple locations.</p>
-
-        <div class="partners" aria-label="Partnered with">
-          <span>Partnered with</span>
-          <img src="assets/partner-smuckers.png" alt="Smuckers" loading="lazy">
-          <img src="assets/partner-gm.png" alt="G&amp;M" loading="lazy">
-          <img src="assets/partner-conoco.png" alt="Conoco" loading="lazy">
-        </div>
-      </section>
-
-      <footer>
-        © <span id="y"></span> Rizo Tech
-      </footer>
-    </div>
-  </main>
-
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-
-    // Subtle emblem tilt (micro-interaction). Remove if you want totally static.
-    (function(){
-      const el = document.getElementById("emblem");
-      if (!el) return;
-      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (reduced) return;
-
-      el.addEventListener("mousemove", (e) => {
-        const r = el.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        el.style.transform = `rotateY(${x * 6}deg) rotateX(${(-y) * 6}deg) translateY(-1px)`;
-      });
-      el.addEventListener("mouseleave", () => {
-        el.style.transform = "rotateY(0deg) rotateX(0deg) translateY(0px)";
-      });
-    })();
-  </script>
+    <section class="section" id="contact">
+      <p class="kicker">Contact</p>
+      <h2 class="h2">rizotech@outlook.com</h2>
+      <p class="p">Email us for service scheduling, installs, or multi location support.</p>
+      <div class="contact">
+        <a class="mail" href="mailto:rizotech@outlook.com">rizotech@outlook.com</a>
+      </div>
+    </section>
+  </div>
 </body>
 </html>
