@@ -7,176 +7,328 @@
 
 <style>
 :root{
-  --bg:#070708;
-  --bg2:#0c0d0f;
-  --panel:#111216;
-  --line:#1f2026;
-  --text:#e8e8ea;
-  --muted:#a2a4ab;
-  --accent:#ffffff;
+  --bg:#060607;
+  --bg2:#0a0b0d;
+  --panel:#0f1116;
+  --panel2:#0c0d10;
+  --line:#1f222b;
+  --line2:#2a2d38;
+
+  --text:#ececef;
+  --muted:#a5a7b0;
 
   --wrap:1200px;
-  --pad:26px;
+  --pad:28px;
 
-  --heroTop:120px;
-  --heroBottom:90px;
-  --sectionTop:110px;
+  --shadow: rgba(0,0,0,.75);
+  --radius:18px;
+
+  /* Type */
+  --h2:22px;
+  --p:15.5px;
+
+  /* Timing */
+  --ease: cubic-bezier(.2,.8,.2,1);
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   background:
-    radial-gradient(1200px 700px at 50% -10%, #15161c 0%, var(--bg) 55%),
-    linear-gradient(180deg, var(--bg), var(--bg2));
+    radial-gradient(1100px 720px at 50% -12%, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 55%),
+    radial-gradient(900px 520px at 18% 20%, rgba(255,255,255,.04) 0%, rgba(255,255,255,0) 60%),
+    radial-gradient(900px 520px at 86% 26%, rgba(255,255,255,.03) 0%, rgba(255,255,255,0) 60%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
   color:var(--text);
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
-  letter-spacing:.2px;
-  line-height:1.6;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-feature-settings:"ss01","cv01","cv02";
+  letter-spacing:.12px;
+  line-height:1.65;
+  overflow-x:hidden;
 }
 
+/* Industrial grid + noise */
 body::before{
   content:"";
   position:fixed;inset:0;
   background:
-    linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,.03) 1px, transparent 1px);
-  background-size:80px 80px;
+    linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size:88px 88px;
   opacity:.05;
   pointer-events:none;
-  mask-image:radial-gradient(circle at 50% 20%, black 0%, transparent 70%);
+  mask-image:radial-gradient(circle at 50% 18%, black 0%, transparent 72%);
+}
+body::after{
+  content:"";
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+  opacity:.055;
+  pointer-events:none;
+  mix-blend-mode:overlay;
 }
 
+/* Layout */
 .wrap{
   max-width:var(--wrap);
   margin:auto;
   padding:40px var(--pad) 140px;
 }
 
-/* TOP BAR */
+/* Topbar (sticky, premium) */
 .topbar{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:14px 20px;
-  border:1px solid var(--line);
+  gap: 16px;
+  padding:14px 18px;
+  border:1px solid rgba(255,255,255,.10);
   border-radius:999px;
-  background:rgba(10,10,12,.7);
-  backdrop-filter:blur(10px);
-  position:sticky;top:16px;z-index:10;
+  background:rgba(10,10,12,.72);
+  backdrop-filter:blur(12px);
+  position:sticky;top:16px;z-index:20;
+  box-shadow: 0 24px 80px rgba(0,0,0,.45);
 }
-.topbar span{
+.topbar .left{
+  display:flex;align-items:center;gap:10px;
   font-size:11px;
   letter-spacing:3px;
   text-transform:uppercase;
   color:var(--muted);
-  font-weight:700;
+  font-weight:800;
+  white-space:nowrap;
 }
-.topbar a{
-  margin-left:16px;
+.dot{
+  width:8px;height:8px;border-radius:999px;
+  background:rgba(255,255,255,.18);
+  box-shadow:0 0 0 6px rgba(255,255,255,.03);
+}
+.topbar .right a{
+  margin-left:14px;
   text-decoration:none;
   color:var(--muted);
   font-size:11px;
   letter-spacing:3px;
   text-transform:uppercase;
-  font-weight:700;
+  font-weight:800;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid transparent;
+  transition: all .22s var(--ease);
 }
-.topbar a:hover{color:var(--text)}
+.topbar .right a:hover{
+  color:var(--text);
+  border-color: rgba(255,255,255,.10);
+  background:rgba(255,255,255,.03);
+}
 
 /* HERO */
 .hero{
   text-align:center;
-  padding:var(--heroTop) 12px var(--heroBottom);
+  padding:120px 10px 92px;
+  position:relative;
 }
-.logo-shell{
-  width:210px;height:210px;
-  margin:auto;
-  border-radius:38px;
-  border:1px solid rgba(255,255,255,.12);
-  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
-  display:grid;place-items:center;
-  box-shadow:0 40px 120px rgba(0,0,0,.8);
-}
-.logo-shell img{
-  width:140px;
-  animation:float 6s ease-in-out infinite;
-}
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-7px)}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-40px -10px auto -10px;
+  height:520px;
+  background: radial-gradient(circle at 50% 35%, rgba(255,255,255,.12) 0%, rgba(255,255,255,0) 65%);
+  opacity:.65;
+  pointer-events:none;
 }
 
+/* Dominant logo shell */
+.logo-shell{
+  width:280px;height:280px;
+  margin:0 auto;
+  border-radius:52px;
+  border:1px solid rgba(255,255,255,.14);
+  background:
+    radial-gradient(circle at 40% 25%, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 62%),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  box-shadow:
+    0 50px 150px rgba(0,0,0,.88),
+    inset 0 0 0 1px rgba(255,255,255,.06);
+  position:relative;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  transform: translateZ(0);
+}
+.logo-shell::after{
+  content:"";
+  position:absolute;inset:-90px;
+  background: conic-gradient(from 200deg,
+    rgba(255,255,255,0),
+    rgba(255,255,255,.16),
+    rgba(255,255,255,0)
+  );
+  opacity:.18;
+  animation: spin 10s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.logo-shell img{
+  width:176px;
+  filter: drop-shadow(0 28px 60px rgba(0,0,0,.8));
+  position:relative;z-index:2;
+  animation: precision 5.8s var(--ease) infinite;
+}
+@keyframes precision{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-6px) rotate(.45deg)}
+}
+
+/* Brutalist wordmark */
 .wordmark{
   margin-top:34px;
-  font-size:56px;
-  font-weight:900;
+  font-size:58px;
+  font-weight:950;
   letter-spacing:22px;
   text-transform:uppercase;
+  line-height:1.1;
 }
 .subline{
-  margin-top:16px;
+  margin-top:18px;
   font-size:12px;
-  letter-spacing:4px;
+  letter-spacing:4.2px;
   text-transform:uppercase;
   color:var(--muted);
-  max-width:760px;
+  max-width:820px;
   margin-left:auto;margin-right:auto;
 }
-
 .hero-actions{
-  margin-top:38px;
+  margin-top:40px;
   display:flex;
   justify-content:center;
-  gap:16px;
+  flex-wrap:wrap;
+  gap:14px;
 }
 .btn{
-  padding:13px 20px;
+  padding:14px 20px;
   border-radius:999px;
-  border:1px solid rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.18);
   background:rgba(255,255,255,.04);
   color:var(--text);
   font-size:11px;
   letter-spacing:3px;
   text-transform:uppercase;
-  font-weight:700;
+  font-weight:850;
   text-decoration:none;
+  transition: all .22s var(--ease);
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
 }
-.btn:hover{background:rgba(255,255,255,.08)}
+.btn:hover{
+  background:rgba(255,255,255,.08);
+  transform: translateY(-1px);
+}
+.btn.ghost{
+  background:transparent;
+  border-color: rgba(255,255,255,.10);
+  color:var(--muted);
+}
+.btn.ghost:hover{
+  color:var(--text);
+  border-color: rgba(255,255,255,.16);
+}
 
-/* SECTIONS */
+/* Sections */
 section{
-  margin-top:var(--sectionTop);
-  padding-top:80px;
-  border-top:1px solid var(--line);
+  margin-top:120px;
+  padding-top:86px;
+  border-top:1px solid rgba(255,255,255,.10);
 }
 h2{
-  font-size:22px;
-  font-weight:800;
-  letter-spacing:8px;
+  font-size:var(--h2);
+  font-weight:900;
+  letter-spacing:9px;
   text-transform:uppercase;
   text-align:center;
-  margin-bottom:34px;
+  margin-bottom:38px;
 }
 p{
-  max-width:860px;
-  margin:0 auto 24px;
+  max-width:900px;
+  margin:0 auto 22px;
   color:var(--muted);
-  font-size:15.5px;
+  font-size:var(--p);
+}
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 14px;
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:999px;
+  background:rgba(255,255,255,.02);
+  color:var(--muted);
+  font-size:11px;
+  font-weight:850;
+  letter-spacing:3px;
+  text-transform:uppercase;
 }
 
-/* ABOUT GRID */
+/* Credibility strip */
+.cred{
+  margin-top:40px;
+  border:1px solid rgba(255,255,255,.10);
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+  border-radius:22px;
+  padding:22px 18px;
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap:12px;
+}
+.cred .item{
+  grid-column: span 3;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;
+  padding:16px 14px;
+  background: rgba(0,0,0,.12);
+}
+.cred .num{
+  font-size:22px;
+  font-weight:950;
+  letter-spacing:1px;
+  color:var(--text);
+}
+.cred .lbl{
+  margin-top:6px;
+  font-size:11px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:850;
+}
+.cred .fine{
+  margin-top:10px;
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+/* About grid */
 .grid{
   display:grid;
   grid-template-columns:repeat(12,1fr);
-  gap:18px;
-  margin-top:40px;
+  gap:16px;
+  margin-top:44px;
 }
 .card{
   grid-column:span 4;
   padding:22px 20px;
-  border-radius:18px;
-  border:1px solid var(--line);
-  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.10);
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+  box-shadow: 0 28px 90px rgba(0,0,0,.35);
+  transition: transform .22s var(--ease), border-color .22s var(--ease), background .22s var(--ease);
+}
+.card:hover{
+  transform: translateY(-3px);
+  border-color: rgba(255,255,255,.16);
+  background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.012));
 }
 .card b{
   display:block;
@@ -184,49 +336,129 @@ p{
   letter-spacing:3px;
   text-transform:uppercase;
   margin-bottom:14px;
+  font-weight:900;
 }
 .card span{
   color:var(--muted);
   font-size:14px;
+  line-height:1.65;
 }
 
-/* LOGO ROWS */
+/* Logo rows */
 .logo-row{
   display:flex;
   justify-content:center;
   flex-wrap:wrap;
   gap:34px;
-  margin-top:36px;
+  margin-top:42px;
+  align-items:center;
 }
 .logo-row img{
-  height:38px;
-  filter:grayscale(100%);
-  opacity:.95;
+  height:40px;
+  opacity:.96;
+  transition: transform .22s var(--ease), opacity .22s var(--ease), filter .22s var(--ease);
+  filter: grayscale(100%) contrast(1.08);
+}
+.logo-row img:hover{
+  transform: translateY(-2px);
+  opacity: 1;
+  filter: grayscale(0%) contrast(1.02);
 }
 
-/* FOOTER */
+/* Contact */
+.contact-box{
+  max-width: 760px;
+  margin: 0 auto;
+  border:1px solid rgba(255,255,255,.10);
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+  border-radius:22px;
+  padding:26px 18px;
+  text-align:center;
+}
+.mini{
+  margin-top:14px;
+  font-size:12px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:850;
+}
+.copy{
+  cursor:pointer;
+}
+
+/* Footer */
 footer{
-  margin-top:120px;
-  padding-top:60px;
-  border-top:1px solid var(--line);
+  margin-top:130px;
+  padding-top:66px;
+  border-top:1px solid rgba(255,255,255,.10);
   text-align:center;
   color:var(--muted);
   font-size:13px;
   letter-spacing:2px;
+  font-weight:700;
 }
 footer img{
   height:30px;
   margin:14px;
-  filter:grayscale(100%);
+  opacity:.95;
+  transition: transform .22s var(--ease), filter .22s var(--ease), opacity .22s var(--ease);
+  filter: grayscale(100%);
+}
+footer img:hover{
+  transform: translateY(-2px);
+  filter: grayscale(0%);
+  opacity: 1;
 }
 
-/* RESPONSIVE */
-@media(max-width:900px){
+/* Scroll reveal */
+.reveal{
+  opacity:0;
+  transform: translateY(14px);
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+.reveal.on{
+  opacity:1;
+  transform:none;
+}
+
+/* Mobile-first tightening */
+@media (max-width: 980px){
+  :root{ --pad:18px; --heroTop:96px; --heroBottom:72px; --sectionTop:96px; }
+  .topbar{padding:12px 14px}
+  .topbar .left{letter-spacing:2.5px}
+  .topbar .right a{margin-left:8px;letter-spacing:2.5px}
+
+  .logo-shell{width:220px;height:220px;border-radius:44px}
+  .logo-shell img{width:150px}
+
   .wordmark{font-size:36px;letter-spacing:12px}
-  .logo-shell{width:180px;height:180px}
-  .logo-shell img{width:120px}
-  .grid{grid-template-columns:1fr}
+  section{padding-top:68px}
+
+  .grid{gap:14px}
   .card{grid-column:span 12}
+
+  .cred{grid-template-columns: repeat(6, 1fr)}
+  .cred .item{grid-column: span 3}
+}
+@media (max-width: 520px){
+  .topbar{flex-direction:column;align-items:flex-start;gap:10px;border-radius:20px}
+  .topbar .right{width:100%}
+  .topbar .right a{margin-left:0;margin-right:10px}
+
+  .logo-shell{width:200px;height:200px;border-radius:40px}
+  .logo-shell img{width:140px}
+
+  .wordmark{font-size:30px;letter-spacing:10px}
+  .subline{letter-spacing:3.2px}
+
+  .cred{grid-template-columns: repeat(12, 1fr)}
+  .cred .item{grid-column: span 12}
+}
+
+/* Reduce motion support */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:none !important}
 }
 </style>
 </head>
@@ -234,79 +466,178 @@ footer img{
 <body>
 <div class="wrap">
 
-<div class="topbar">
-  <span>Owner-Led • Enterprise Service</span>
-  <div>
-    <a href="#about">About</a>
-    <a href="#expertise">Expertise</a>
-    <a href="#contact">Contact</a>
-  </div>
-</div>
-
-<div class="hero">
-  <div class="logo-shell">
-    <img src="assets/rizo-tech-logo.png" alt="Rizo Tech Logo">
-  </div>
-
-  <div class="wordmark">R I Z O&nbsp;&nbsp;T E C H</div>
-  <div class="subline">
-    Frozen Beverage Dispensers & Ice Machines • Southern California
+  <div class="topbar reveal">
+    <div class="left">
+      <span class="dot"></span>
+      <span>Owner-Led • Enterprise Service</span>
+    </div>
+    <div class="right">
+      <a href="#about">About</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#credibility">Credibility</a>
+      <a href="#contact">Contact</a>
+    </div>
   </div>
 
-  <div class="hero-actions">
-    <a class="btn" href="mailto:rizotech@outlook.com">Email Rizo Tech</a>
-    <a class="btn" href="#expertise">Equipment</a>
+  <div class="hero reveal" id="top">
+    <div class="logo-shell" aria-label="Rizo Tech mark">
+      <img src="assets/rizo-tech-logo.png" alt="Rizo Tech Logo">
+    </div>
+
+    <div class="wordmark">R I Z O&nbsp;&nbsp;T E C H</div>
+    <div class="subline">Frozen Beverage Dispensers & Ice Machines • Southern California</div>
+
+    <div class="hero-actions">
+      <a class="btn" href="mailto:rizotech@outlook.com">Email Rizo Tech</a>
+      <a class="btn ghost" href="#expertise">Equipment</a>
+      <a class="btn ghost" href="#contact">Enterprise Only</a>
+    </div>
   </div>
+
+  <section id="about" class="reveal">
+    <h2>About</h2>
+    <p style="text-align:center; margin-bottom:28px;">
+      <span class="badge">Owner Technicians • No Callback Culture</span>
+    </p>
+    <p>
+      Rizo Tech is a family-run service company built by technicians who never left the field.
+      We specialize exclusively in frozen beverage dispensers and ice machines for high-volume,
+      multi-location operators.
+    </p>
+    <p>
+      We don’t chase small one-off calls. We support enterprise contracts where uptime, accountability,
+      and technical depth are non-negotiable. The owners are the technicians—on site, verifying work,
+      and protecting performance.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <b>Owner-Technicians</b>
+        <span>The people accountable are the people who show up and fix the system.</span>
+      </div>
+      <div class="card">
+        <b>Enterprise Focus</b>
+        <span>Built for 100+ machine and multi-location operations where downtime is money.</span>
+      </div>
+      <div class="card">
+        <b>Verified Performance</b>
+        <span>Fix it right. Verify it. Document it. Protect the contract.</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="expertise" class="reveal">
+    <h2>Equipment Expertise</h2>
+    <p>
+      Frozen beverage dispensers and ice systems across major commercial platforms.
+      We service, install, and keep uptime stable at scale.
+    </p>
+
+    <div class="logo-row" aria-label="Brands">
+      <img src="assets/brand-cornelius.png" alt="Cornelius">
+      <img src="assets/brand-servend.png" alt="Servend">
+      <img src="assets/brand-schaerer.png" alt="Schaerer">
+      <img src="assets/brand-manitowoc.png" alt="Manitowoc">
+      <img src="assets/brand-curtis.png" alt="Curtis">
+      <img src="assets/brand-icee.png" alt="ICEE">
+    </div>
+  </section>
+
+  <section id="credibility" class="reveal">
+    <h2>Credibility</h2>
+    <p>
+      We’re built for contract-level maintenance where response, consistency, and accountability matter.
+      If you manage a large fleet of machines, this is what you want behind it.
+    </p>
+
+    <div class="cred">
+      <div class="item">
+        <div class="num">Enterprise</div>
+        <div class="lbl">Contracts Only</div>
+        <div class="fine">No small one-offs. We focus on scale.</div>
+      </div>
+      <div class="item">
+        <div class="num">Owner</div>
+        <div class="lbl">On Site</div>
+        <div class="fine">Owners are technicians. Work is verified.</div>
+      </div>
+      <div class="item">
+        <div class="num">Low</div>
+        <div class="lbl">Callbacks</div>
+        <div class="fine">Fix it right, document it, protect uptime.</div>
+      </div>
+      <div class="item">
+        <div class="num">SoCal</div>
+        <div class="lbl">Coverage</div>
+        <div class="fine">Southern California service footprint.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="reveal">
+    <h2>Contact</h2>
+    <div class="contact-box">
+      <p style="margin-bottom:10px;">
+        Enterprise contracts only. Southern California.
+      </p>
+      <a class="btn" href="mailto:rizotech@outlook.com">rizotech@outlook.com</a>
+      <div class="mini">
+        <span class="copy" id="copyEmail">Tap to copy email</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="reveal">
+    <p>Partnered With</p>
+    <div aria-label="Partners">
+      <img src="assets/partner-smuckers.png" alt="Smuckers">
+      <img src="assets/partner-gm.png" alt="G&amp;M">
+      <img src="assets/partner-conoco.png" alt="Conoco">
+    </div>
+  </footer>
+
 </div>
 
-<section id="about">
-<h2>About</h2>
-<p>
-Rizo Tech is a family-run refrigeration service company built by technicians who never left the field.
-We specialize exclusively in frozen beverage dispensers and ice machines for large, multi-location operators.
-</p>
-<p>
-We don’t chase small one-off calls. We support enterprise contracts where uptime, accountability, and
-deep technical knowledge are non-negotiable. The owners are the technicians—on site, verifying work,
-eliminating callbacks, and protecting performance.
-</p>
+<script>
+/* scroll reveal */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('on');
+  });
+},{threshold:0.14});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-<div class="grid">
-  <div class="card"><b>Owner Technicians</b><span>The people responsible are the people on the job.</span></div>
-  <div class="card"><b>Enterprise Focus</b><span>Built for 100+ machine and multi-location operations.</span></div>
-  <div class="card"><b>Reliability First</b><span>Low callbacks. Verified repairs. Predictable results.</span></div>
-</div>
-</section>
+/* micro parallax on logo (subtle) */
+const shell = document.querySelector('.logo-shell');
+window.addEventListener('mousemove', (e)=>{
+  if(!shell) return;
+  const r = shell.getBoundingClientRect();
+  const cx = r.left + r.width/2;
+  const cy = r.top + r.height/2;
+  const dx = (e.clientX - cx) / r.width;
+  const dy = (e.clientY - cy) / r.height;
+  const rx = (-dy * 6).toFixed(2);
+  const ry = (dx * 7).toFixed(2);
+  shell.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+});
+window.addEventListener('mouseleave', ()=>{
+  if(shell) shell.style.transform = '';
+});
 
-<section id="expertise">
-<h2>Equipment Expertise</h2>
-<p>Frozen beverage dispensers and ice systems across major commercial platforms.</p>
-
-<div class="logo-row">
-  <img src="assets/brand-cornelius.png">
-  <img src="assets/brand-servend.png">
-  <img src="assets/brand-schaerer.png">
-  <img src="assets/brand-manitowoc.png">
-  <img src="assets/brand-curtis.png">
-  <img src="assets/brand-icee.png">
-</div>
-</section>
-
-<section id="contact">
-<h2>Contact</h2>
-<p>Southern California • Enterprise Contracts Only</p>
-<div style="text-align:center">
-  <a class="btn" href="mailto:rizotech@outlook.com">rizotech@outlook.com</a>
-</div>
-</section>
-
-<footer>
-<p>Partnered With</p>
-<img src="assets/partner-smuckers.png">
-<img src="assets/partner-gm.png">
-<img src="assets/partner-conoco.png">
-</footer>
-
-</div>
+/* copy email */
+const copyBtn = document.getElementById('copyEmail');
+if(copyBtn){
+  copyBtn.addEventListener('click', async ()=>{
+    try{
+      await navigator.clipboard.writeText('rizotech@outlook.com');
+      copyBtn.textContent = 'Copied ✓';
+      setTimeout(()=>copyBtn.textContent='Tap to copy email', 1600);
+    }catch{
+      copyBtn.textContent = 'Copy failed';
+      setTimeout(()=>copyBtn.textContent='Tap to copy email', 1600);
+    }
+  });
+}
+</script>
 </body>
 </html>
