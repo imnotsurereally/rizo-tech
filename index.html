@@ -1,0 +1,1125 @@
+<!--
+RIZO TECH — One-Page “God Mode” Site (single-file build)
+Drop this into: index.html
+Put your images in: /assets/
+
+ASSETS YOU SHOULD ADD:
+- /assets/rizo-tech-logo.png          (optional: your final full logo image)
+- /assets/brand-cornelius.png
+- /assets/brand-servend.png
+- /assets/brand-schaerer.png
+- /assets/brand-manitowoc.png
+- /assets/brand-curtis.png
+- /assets/brand-icee.png              (optional)
+- /assets/partner-smuckers.png
+- /assets/partner-gm.png              (your G&M purple/yellow mark)
+- /assets/partner-conoco.png
+
+If you don’t have logos yet, keep the placeholders — swap later.
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rizo Tech — Frozen Beverage & Ice Machine Service (SoCal)</title>
+    <meta
+      name="description"
+      content="Owner-led field technicians specializing in frozen beverage dispensers and ice machines for high-volume multi-location operators across Southern California."
+    />
+    <meta name="theme-color" content="#06070a" />
+
+    <style>
+      /* =========================
+         GODMODE THEME SYSTEM
+      ========================== */
+      :root {
+        --bg: #050608;
+        --bg2: #07090f;
+        --panel: rgba(255, 255, 255, 0.03);
+        --panel2: rgba(255, 255, 255, 0.06);
+        --stroke: rgba(255, 255, 255, 0.12);
+        --stroke2: rgba(255, 255, 255, 0.18);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.62);
+        --muted2: rgba(255, 255, 255, 0.42);
+        --shadow: 0 24px 90px rgba(0, 0, 0, 0.65);
+        --shadow2: 0 8px 28px rgba(0, 0, 0, 0.55);
+        --radius: 18px;
+        --radius2: 26px;
+        --max: 1200px;
+
+        --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+
+        --ease: cubic-bezier(0.2, 0.9, 0.2, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: var(--sans);
+        color: var(--text);
+        background: radial-gradient(
+            1400px 700px at 75% 20%,
+            rgba(255, 255, 255, 0.07),
+            transparent 55%
+          ),
+          radial-gradient(
+            1100px 600px at 20% 40%,
+            rgba(255, 255, 255, 0.05),
+            transparent 60%
+          ),
+          linear-gradient(180deg, var(--bg), var(--bg2));
+        overflow-x: hidden;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      /* Subtle industrial motion layer */
+      .bg-motion {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.55;
+        mix-blend-mode: screen;
+        background-image: radial-gradient(
+            circle at 50% 50%,
+            rgba(255, 255, 255, 0.05),
+            transparent 60%
+          ),
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.06) 1px,
+            transparent 1px
+          ),
+          linear-gradient(
+            0deg,
+            rgba(255, 255, 255, 0.05) 1px,
+            transparent 1px
+          );
+        background-size: 100% 100%, 64px 64px, 64px 64px;
+        filter: blur(0.2px);
+        transform: translate3d(0, 0, 0);
+        animation: gridDrift 16s linear infinite;
+      }
+
+      @keyframes gridDrift {
+        0% {
+          background-position: 0 0, 0 0, 0 0;
+        }
+        100% {
+          background-position: 0 0, 220px 110px, -110px 220px;
+        }
+      }
+
+      /* Grain overlay */
+      .grain {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0.08;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      }
+
+      /* Page wrapper */
+      .wrap {
+        position: relative;
+        z-index: 2;
+      }
+
+      /* =========================
+         HEADER
+      ========================== */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        background: rgba(5, 6, 8, 0.6);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+      }
+      .header-inner {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .brand-lockup {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: radial-gradient(
+            110% 110% at 30% 15%,
+            rgba(255, 255, 255, 0.24),
+            rgba(255, 255, 255, 0.05) 55%,
+            transparent 75%
+          ),
+          rgba(255, 255, 255, 0.02);
+        box-shadow: var(--shadow2);
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        position: relative;
+      }
+      .brand-mark::after {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        background: conic-gradient(
+          from 180deg,
+          transparent,
+          rgba(255, 255, 255, 0.25),
+          transparent
+        );
+        animation: spin 6s linear infinite;
+        opacity: 0.55;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .brand-mark svg {
+        position: relative;
+        z-index: 1;
+        opacity: 0.95;
+      }
+
+      .brand-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+      }
+      .brand-title {
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.88);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .brand-sub {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--muted2);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .header-spacer {
+        margin-left: auto;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.03);
+        box-shadow: 0 14px 50px rgba(0, 0, 0, 0.35);
+        transition: transform 0.2s var(--ease), background 0.2s var(--ease);
+        cursor: pointer;
+        user-select: none;
+      }
+      .pill:hover {
+        transform: translateY(-1px);
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .pill .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.05);
+      }
+      .pill span {
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.82);
+      }
+
+      .btn {
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.03);
+        color: rgba(255, 255, 255, 0.92);
+        padding: 10px 14px;
+        border-radius: 999px;
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: transform 0.2s var(--ease), background 0.2s var(--ease);
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        background: rgba(255, 255, 255, 0.07);
+      }
+      .btn.primary {
+        border-color: rgba(255, 255, 255, 0.28);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.08),
+          rgba(255, 255, 255, 0.03)
+        );
+      }
+
+      /* =========================
+         HERO
+      ========================== */
+      .hero {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 44px 18px 16px;
+        position: relative;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      .card {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.025);
+        border-radius: var(--radius2);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        background: radial-gradient(
+            900px 220px at 40% 0%,
+            rgba(255, 255, 255, 0.12),
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 240px at 85% 20%,
+            rgba(255, 255, 255, 0.08),
+            transparent 55%
+          );
+        opacity: 0.8;
+        pointer-events: none;
+      }
+
+      .hero-left {
+        padding: 26px 24px 22px;
+        min-height: 320px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.03);
+        width: fit-content;
+      }
+      .kicker b {
+        font-size: 12px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .kicker em {
+        font-style: normal;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      h1 {
+        margin: 14px 0 10px;
+        font-size: clamp(26px, 3.2vw, 44px);
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+      }
+
+      .subhead {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.45;
+        max-width: 56ch;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .note {
+        color: var(--muted2);
+        font-family: var(--mono);
+        font-size: 12px;
+      }
+
+      /* Right hero (live logo stage) */
+      .hero-right {
+        padding: 22px;
+        display: grid;
+        place-items: center;
+        min-height: 320px;
+      }
+
+      .logo-stage {
+        width: min(420px, 100%);
+        aspect-ratio: 4 / 3;
+        border-radius: 22px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: radial-gradient(
+            800px 320px at 20% 10%,
+            rgba(255, 255, 255, 0.1),
+            transparent 55%
+          ),
+          radial-gradient(
+            900px 360px at 70% 80%,
+            rgba(255, 255, 255, 0.06),
+            transparent 60%
+          ),
+          rgba(0, 0, 0, 0.35);
+        box-shadow: var(--shadow2);
+        position: relative;
+        overflow: hidden;
+        transform-style: preserve-3d;
+      }
+
+      .logo-stage::after {
+        /* subtle sheen sweep */
+        content: "";
+        position: absolute;
+        inset: -50%;
+        background: linear-gradient(
+          120deg,
+          transparent 35%,
+          rgba(255, 255, 255, 0.18) 50%,
+          transparent 65%
+        );
+        transform: translateX(-40%) translateY(-15%) rotate(8deg);
+        animation: sheen 5.2s var(--ease) infinite;
+        opacity: 0.65;
+        pointer-events: none;
+      }
+
+      @keyframes sheen {
+        0% {
+          transform: translateX(-55%) translateY(-10%) rotate(10deg);
+        }
+        55% {
+          transform: translateX(55%) translateY(12%) rotate(10deg);
+        }
+        100% {
+          transform: translateX(55%) translateY(12%) rotate(10deg);
+        }
+      }
+
+      .logo-live {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+      }
+
+      .monogram {
+        width: 56%;
+        max-width: 240px;
+        filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.65));
+        transform: translateZ(20px);
+      }
+
+      .wordmark {
+        margin-top: 14px;
+        font-weight: 700;
+        letter-spacing: 0.34em; /* GODMODE spacing: R I Z O  T E C H */
+        text-transform: uppercase;
+        font-size: 18px;
+        color: rgba(255, 255, 255, 0.86);
+        text-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+      }
+
+      .wordmark small {
+        display: block;
+        margin-top: 10px;
+        letter-spacing: 0.52em;
+        color: rgba(255, 255, 255, 0.42);
+        font-family: var(--mono);
+        font-weight: 500;
+        font-size: 10px;
+      }
+
+      /* =========================
+         SECTIONS
+      ========================== */
+      .section {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 18px 18px;
+      }
+
+      .section-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .panel {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: var(--radius2);
+        box-shadow: var(--shadow2);
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .panel h2 {
+        margin: 0 0 10px;
+        font-size: 16px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .panel p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+        font-size: 14px;
+      }
+
+      .divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.08);
+        margin: 14px 0;
+      }
+
+      .caps {
+        font-family: var(--mono);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.66);
+        font-size: 12px;
+      }
+
+      /* Brand strip */
+      .logo-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        margin-top: 12px;
+      }
+
+      .brand-chip {
+        height: 34px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.02);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .brand-chip img {
+        height: 18px;
+        width: auto;
+        display: block;
+        filter: saturate(1.05) contrast(1.05);
+      }
+
+      .brand-chip span {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.08em;
+      }
+
+      /* Service area + contact */
+      .two-up {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .cta-box {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .email-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .email {
+        font-family: var(--mono);
+        font-size: 13px;
+        padding: 10px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 18px;
+        transform: translateX(-50%) translateY(20px);
+        opacity: 0;
+        pointer-events: none;
+        padding: 10px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(0, 0, 0, 0.55);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+        z-index: 80;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* Footer partners */
+      .footer {
+        max-width: var(--max);
+        margin: 0 auto;
+        padding: 18px 18px 34px;
+      }
+      .footer-inner {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .partners {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+      .partners .label {
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.55);
+        margin-right: 6px;
+      }
+      .partner-logo {
+        height: 18px;
+        width: auto;
+        opacity: 0.9;
+        filter: contrast(1.05);
+      }
+
+      .tiny {
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 12px;
+        font-family: var(--mono);
+      }
+
+      /* =========================
+         REVEAL ANIMATIONS
+      ========================== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(14px);
+        transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* =========================
+         RESPONSIVE
+      ========================== */
+      @media (max-width: 980px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+        .section-grid,
+        .two-up {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .wordmark {
+          letter-spacing: 0.24em;
+          font-size: 16px;
+        }
+        .hero-left {
+          padding: 22px 18px;
+        }
+      }
+
+      /* Respect reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .bg-motion,
+        .grain,
+        .logo-stage::after {
+          animation: none !important;
+        }
+        .reveal {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="bg-motion"></div>
+    <div class="grain"></div>
+
+    <div class="wrap">
+      <!-- HEADER -->
+      <header class="header">
+        <div class="header-inner">
+          <a class="brand-lockup" href="#top" aria-label="Rizo Tech home">
+            <div class="brand-mark" aria-hidden="true">
+              <!-- Mini RT Monogram icon (achromatic) -->
+              <svg width="22" height="22" viewBox="0 0 64 64" fill="none">
+                <path
+                  d="M16 10h26c10 0 16 6 16 16 0 7-3 12-9 14l10 14h-14l-8-12h-7v12H16V10z"
+                  stroke="rgba(255,255,255,.85)"
+                  stroke-width="4"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M28 18h18"
+                  stroke="rgba(255,255,255,.85)"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M32 18v24"
+                  stroke="rgba(255,255,255,.85)"
+                  stroke-width="4"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </div>
+            <div class="brand-text">
+              <div class="brand-title">Rizo Tech</div>
+              <div class="brand-sub">Frozen Beverage + Ice Machines • SoCal</div>
+            </div>
+          </a>
+
+          <div class="header-spacer"></div>
+
+          <button class="pill" id="copyEmailPill" type="button" title="Copy email">
+            <span class="dot" aria-hidden="true"></span>
+            <span>Copy Email</span>
+          </button>
+
+          <a class="btn primary" href="#contact">Email Us</a>
+        </div>
+      </header>
+
+      <!-- HERO -->
+      <main id="top" class="hero">
+        <div class="hero-grid">
+          <section class="card hero-left reveal">
+            <div>
+              <div class="kicker">
+                <b>Owner-led</b>
+                <em>high-volume contracts only</em>
+              </div>
+
+              <h1>Frozen Beverage & Ice Machine Service Built for 100+ Locations.</h1>
+
+              <p class="subhead">
+                We specialize in dispenser and ice systems where uptime matters. Fast response,
+                low callbacks, and accountability — because the owners are still the field techs.
+              </p>
+
+              <div class="hero-actions">
+                <a class="btn primary" href="#contact">Request Service</a>
+                <button class="btn" type="button" id="copyEmailBtn">Copy Email</button>
+                <span class="note">rizotech@outlook.com</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="divider"></div>
+              <div class="caps">
+                Southern California • Multi-location operators preferred • Performance first
+              </div>
+            </div>
+          </section>
+
+          <aside class="card hero-right reveal" aria-label="Rizo Tech live logo">
+            <div class="logo-stage" id="logoStage">
+              <div class="logo-live">
+                <!-- LIVE MONOGRAM (T inside R) — achromatic -->
+                <!-- This is vector-based so it stays clean; we animate sheen via SVG gradient + CSS. -->
+                <svg class="monogram" viewBox="0 0 420 420" role="img" aria-label="RT monogram">
+                  <defs>
+                    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+                      <stop offset="35%" stop-color="#bfc2c7" stop-opacity="0.9" />
+                      <stop offset="55%" stop-color="#6b7077" stop-opacity="0.95" />
+                      <stop offset="80%" stop-color="#d7dade" stop-opacity="0.92" />
+                      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.88" />
+                    </linearGradient>
+
+                    <linearGradient id="sweep" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stop-color="rgba(255,255,255,0)" />
+                      <stop offset="50%" stop-color="rgba(255,255,255,0.55)" />
+                      <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+                    </linearGradient>
+
+                    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+                      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity="0.6" />
+                    </filter>
+
+                    <mask id="maskSweep">
+                      <rect x="-60" y="0" width="540" height="420" fill="black" />
+                      <rect id="sweepRect" x="-260" y="0" width="260" height="420" fill="url(#sweep)" />
+                    </mask>
+                  </defs>
+
+                  <!-- Outer R form (clean geometric, not awkward) -->
+                  <path
+                    d="M98 72h152c63 0 102 33 102 89 0 37-18 65-53 77l64 110H300l-46-84h-42v84H98V72z
+                       M212 160v64h40c25 0 38-12 38-33 0-20-14-31-39-31h-39z"
+                    fill="url(#metal)"
+                    opacity="0.96"
+                    filter="url(#shadow)"
+                  />
+
+                  <!-- Inner T (fully formed, not clipped) -->
+                  <path
+                    d="M170 138h120v42h-39v168h-42V180h-39v-42z"
+                    fill="rgba(0,0,0,0.30)"
+                    opacity="0.9"
+                  />
+
+                  <!-- Animated sweep highlight across entire mark -->
+                  <g mask="url(#maskSweep)" opacity="0.55">
+                    <path
+                      d="M98 72h152c63 0 102 33 102 89 0 37-18 65-53 77l64 110H300l-46-84h-42v84H98V72z
+                         M212 160v64h40c25 0 38-12 38-33 0-20-14-31-39-31h-39z"
+                      fill="white"
+                    />
+                  </g>
+                </svg>
+
+                <!-- Wordmark with “R I Z O  T E C H” spacing -->
+                <div class="wordmark">
+                  RIZO TECH
+                  <small>FROZEN BEVERAGE • ICE MACHINES</small>
+                </div>
+
+                <!-- If you prefer using your generated full logo image instead, uncomment below:
+                <img src="/assets/rizo-tech-logo.png" alt="Rizo Tech logo" style="width:80%; height:auto; filter: drop-shadow(0 18px 26px rgba(0,0,0,.6));" />
+                -->
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+
+      <!-- ABOUT + SPECIALTY -->
+      <section class="section">
+        <div class="section-grid">
+          <div class="panel reveal">
+            <h2>About Us</h2>
+            <p>
+              Rizo Tech is a family-run commercial service built by four brothers — and we’re still
+              the ones in the field. After years in corporate service, we saw the same failures:
+              slow response, undertrained techs, and callbacks that cost operators real money.
+            </p>
+            <div class="divider"></div>
+            <p>
+              We specialize in <b>frozen beverage dispensers</b> and <b>ice machines</b> for
+              <b>large multi-location contracts</b>. We can service anything, but we focus where
+              performance matters most: uptime, consistency, and accountability.
+            </p>
+          </div>
+
+          <div class="panel reveal">
+            <h2>What We Service</h2>
+            <p>
+              Service + install for frozen beverage and ice systems across major commercial brands.
+              If you manage high-volume fleets, we’re built for your requirements.
+            </p>
+
+            <div class="divider"></div>
+
+            <div class="caps">Brands (logos in full color on black)</div>
+            <div class="logo-strip" aria-label="Brand logos">
+              <!-- Replace placeholders with real logos in /assets/ -->
+              <div class="brand-chip">
+                <img src="/assets/brand-cornelius.png" alt="Cornelius" onerror="this.style.display='none'; this.parentElement.querySelector('span').style.display='inline';" />
+                <span style="display:none">CORNELIUS</span>
+              </div>
+
+              <div class="brand-chip">
+                <img src="/assets/brand-servend.png" alt="Servend" onerror="this.style.display='none'; this.parentElement.querySelector('span').style.display='inline';" />
+                <span style="display:none">SERVEND</span>
+              </div>
+
+              <div class="brand-chip">
+                <img src="/assets/brand-schaerer.png" alt="Schaerer" onerror="this.style.display='none'; this.parentElement.querySelector('span').style.display='inline';" />
+                <span style="display:none">SCHAERER</span>
+              </div>
+
+              <div class="brand-chip">
+                <img src="/assets/brand-manitowoc.png" alt="Manitowoc" onerror="this.style.display='none'; this.parentElement.querySelector('span').style.display='inline';" />
+                <span style="display:none">MANITOWOC</span>
+              </div>
+
+              <div class="brand-chip">
+                <img src="/assets/brand-curtis.png" alt="Curtis" onerror="this.style.display='none'; this.parentElement.querySelector('span').style.display='inline';" />
+                <span style="display:none">CURTIS</span>
+              </div>
+
+              <div class="brand-chip">
+                <img src="/assets/brand-icee.png" alt="ICEE" onerror="this.style.display='none'; this.parentElement.querySelector('span').style.display='inline';" />
+                <span style="display:none">ICEE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICE AREA + CONTACT -->
+      <section class="section">
+        <div class="two-up">
+          <div class="panel reveal">
+            <h2>Service Area</h2>
+            <p><b>Southern California</b></p>
+            <div class="divider"></div>
+            <p class="caps">Multi-location operators preferred</p>
+            <p style="margin-top: 8px">
+              If you manage 100+ machines or stations and need consistent uptime, we’re aligned.
+            </p>
+          </div>
+
+          <div class="panel reveal" id="contact">
+            <h2>Contact</h2>
+            <div class="cta-box">
+              <p>
+                Email us and tell us your location count, equipment type, and urgency. We’ll respond
+                fast.
+              </p>
+
+              <div class="email-row">
+                <span class="email" id="emailText">rizotech@outlook.com</span>
+                <a class="btn primary" href="mailto:rizotech@outlook.com">Email Now</a>
+                <button class="btn" type="button" id="copyEmailBtn2">Copy</button>
+              </div>
+
+              <p class="caps" style="margin-top: 6px">
+                Performance • Reliability • Accountability
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER / PARTNERED WITH -->
+      <footer class="footer">
+        <div class="footer-inner">
+          <div class="partners" aria-label="Partnered with">
+            <span class="label">Partnered with</span>
+
+            <img
+              class="partner-logo"
+              src="/assets/partner-smuckers.png"
+              alt="Smucker's"
+              onerror="this.style.display='none'"
+            />
+            <img
+              class="partner-logo"
+              src="/assets/partner-gm.png"
+              alt="G&M"
+              onerror="this.style.display='none'"
+            />
+            <img
+              class="partner-logo"
+              src="/assets/partner-conoco.png"
+              alt="Conoco"
+              onerror="this.style.display='none'"
+            />
+          </div>
+
+          <div class="tiny">
+            © <span id="year"></span> Rizo Tech • Built for high-volume operators
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast">Copied: rizotech@outlook.com</div>
+
+    <script>
+      // =========================
+      // GODMODE INTERACTION LAYER
+      // =========================
+      (function () {
+        const email = "rizotech@outlook.com";
+
+        // Year
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Copy helpers
+        const toast = document.getElementById("toast");
+        let toastTimer = null;
+
+        async function copyEmail() {
+          try {
+            await navigator.clipboard.writeText(email);
+            showToast();
+          } catch (e) {
+            // Fallback
+            const el = document.createElement("textarea");
+            el.value = email;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand("copy");
+            document.body.removeChild(el);
+            showToast();
+          }
+        }
+
+        function showToast() {
+          toast.classList.add("show");
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(() => toast.classList.remove("show"), 1400);
+        }
+
+        // Bind copy buttons
+        const binds = ["copyEmailBtn", "copyEmailBtn2", "copyEmailPill"];
+        binds.forEach((id) => {
+          const btn = document.getElementById(id);
+          if (btn) btn.addEventListener("click", copyEmail);
+        });
+
+        // Reveal on scroll
+        const els = Array.from(document.querySelectorAll(".reveal"));
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) e.target.classList.add("in");
+            });
+          },
+          { threshold: 0.12 }
+        );
+        els.forEach((el) => io.observe(el));
+
+        // Subtle parallax tilt for logo stage (desktop only)
+        const stage = document.getElementById("logoStage");
+        let raf = null;
+
+        function onMove(ev) {
+          if (!stage) return;
+          const r = stage.getBoundingClientRect();
+          const x = (ev.clientX - (r.left + r.width / 2)) / r.width;
+          const y = (ev.clientY - (r.top + r.height / 2)) / r.height;
+          const rx = (-y * 6).toFixed(2);
+          const ry = (x * 8).toFixed(2);
+
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(() => {
+            stage.style.transform =
+              "perspective(900px) rotateX(" + rx + "deg) rotateY(" + ry + "deg) translateY(-1px)";
+          });
+        }
+
+        function resetTilt() {
+          if (!stage) return;
+          stage.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg)";
+        }
+
+        // Only attach if not reduced motion
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (!reduce && stage) {
+          window.addEventListener("mousemove", onMove);
+          window.addEventListener("mouseleave", resetTilt);
+        }
+
+        // Animate SVG sweep mask
+        const sweepRect = document.getElementById("sweepRect");
+        if (!reduce && sweepRect) {
+          let x = -260;
+          function tick() {
+            x += 4.2;
+            if (x > 520) x = -260;
+            sweepRect.setAttribute("x", x.toFixed(2));
+            requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+        }
+
+        // Smooth scroll for in-page anchors
+        document.querySelectorAll('a[href^="#"]').forEach((a) => {
+          a.addEventListener("click", (e) => {
+            const href = a.getAttribute("href");
+            if (!href || href === "#") return;
+            const target = document.querySelector(href);
+            if (!target) return;
+            e.preventDefault();
+            target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
