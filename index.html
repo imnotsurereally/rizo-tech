@@ -2,211 +2,264 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>RIZO TECH — Frozen Beverage & Ice Machines</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rizo Tech — Frozen Beverage & Ice Machines</title>
 
   <style>
-    :root {
-      --bg: #0b0b0c;
-      --panel: #111214;
-      --text: #e6e6e6;
-      --muted: #9a9a9a;
-      --line: #1f1f22;
+    :root{
+      --bg:#070708;
+      --bg2:#0b0b0c;
+      --panel:#0f1012;
+      --text:#e9e9ea;
+      --muted:#a5a5aa;
+      --line:#1c1c20;
+      --shadow: rgba(0,0,0,.7);
+      --radius:18px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      background:
+        radial-gradient(1200px 700px at 50% -10%, #121318 0%, var(--bg) 55%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      color:var(--text);
+      font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",system-ui,sans-serif;
+      line-height:1.55;
+      letter-spacing:.2px;
+      overflow-x:hidden;
     }
 
-    body {
-      background: radial-gradient(circle at top, #121316, #08090a);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
-      line-height: 1.6;
-      letter-spacing: 0.3px;
+    /* subtle industrial grid */
+    body:before{
+      content:"";
+      position:fixed;inset:0;
+      background:
+        linear-gradient(to right, rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 72px 72px;
+      opacity:.05;
+      pointer-events:none;
+      mask-image: radial-gradient(circle at 50% 25%, black 0%, transparent 70%);
     }
 
-    .wrap {
-      max-width: 1200px;
-      margin: auto;
-      padding: 80px 24px;
+    .wrap{max-width:1180px;margin:auto;padding:32px 22px 90px}
+
+    /* top bar */
+    .topbar{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:14px 18px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(10,10,11,.6);
+      backdrop-filter: blur(10px);
+      position:sticky;top:16px;z-index:50;
+    }
+    .topbar span{
+      font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)
+    }
+    .topbar a{
+      color:var(--muted);text-decoration:none;
+      font-size:12px;letter-spacing:2px;text-transform:uppercase;
+      padding:8px 12px;border-radius:999px;
+    }
+    .topbar a:hover{color:var(--text)}
+
+    /* hero */
+    .hero{text-align:center;padding:90px 16px 20px;position:relative}
+    .logoWrap{
+      width:190px;height:190px;margin:auto;
+      border-radius:34px;
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+      box-shadow:0 30px 90px var(--shadow);
+      display:grid;place-items:center;
+      overflow:hidden;
+    }
+    .logo{
+      width:130px;
+      filter:drop-shadow(0 20px 40px rgba(0,0,0,.7));
+      animation:float 6s ease-in-out infinite;
+    }
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-6px)}
     }
 
-    /* HERO */
-    .hero {
-      text-align: center;
-      margin-bottom: 120px;
+    .brand{
+      margin-top:22px;
+      font-size:46px;
+      font-weight:650;
+      letter-spacing:14px;
+    }
+    .tagline{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+      letter-spacing:3.5px;
+      text-transform:uppercase;
     }
 
-    .logo {
-      width: 160px;
-      margin-bottom: 28px;
-      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.7));
-      animation: breathe 6s ease-in-out infinite;
+    .heroActions{
+      margin-top:26px;
+      display:flex;justify-content:center;gap:14px;flex-wrap:wrap;
+    }
+    .btn{
+      padding:12px 18px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      text-decoration:none;
+      font-size:12px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
+    .btn:hover{background:rgba(255,255,255,.08)}
+
+    section{margin-top:90px;border-top:1px solid var(--line);padding-top:60px}
+    h2{
+      font-size:20px;
+      letter-spacing:6px;
+      text-transform:uppercase;
+      margin-bottom:18px;
+    }
+    p{max-width:860px;color:var(--muted);margin-bottom:16px;font-size:16px}
+
+    /* cards */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12,1fr);
+      gap:14px;margin-top:24px
+    }
+    .card{
+      grid-column:span 4;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px;
+      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));
+    }
+    .card b{
+      display:block;
+      font-size:12px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .card span{color:var(--muted);font-size:14px}
+
+    /* logos */
+    .logo-row{
+      display:flex;flex-wrap:wrap;gap:28px;margin-top:22px;align-items:center
+    }
+    .logo-row img{
+      height:38px;
+      filter:grayscale(100%);
+      opacity:.9;
     }
 
-    @keyframes breathe {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+    footer{
+      margin-top:90px;
+      border-top:1px solid var(--line);
+      padding-top:46px;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+    }
+    footer img{
+      height:30px;margin:0 14px;
+      filter:grayscale(100%);
+      opacity:.9;
     }
 
-    .brand {
-      font-size: 32px;
-      letter-spacing: 10px;
-      margin-bottom: 12px;
-    }
+    /* reveal */
+    .reveal{opacity:0;transform:translateY(14px);transition:.7s ease}
+    .reveal.on{opacity:1;transform:none}
 
-    .tagline {
-      color: var(--muted);
-      font-size: 14px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
-
-    /* SECTION */
-    section {
-      margin-bottom: 120px;
-      border-top: 1px solid var(--line);
-      padding-top: 80px;
-    }
-
-    h2 {
-      font-size: 26px;
-      letter-spacing: 4px;
-      margin-bottom: 24px;
-      text-transform: uppercase;
-    }
-
-    p {
-      max-width: 820px;
-      color: var(--muted);
-      margin-bottom: 20px;
-      font-size: 17px;
-    }
-
-    /* BADGE */
-    .badge {
-      display: inline-block;
-      padding: 6px 14px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-size: 12px;
-      letter-spacing: 2px;
-      margin-bottom: 24px;
-      color: var(--muted);
-    }
-
-    /* LOGO ROWS */
-    .logo-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      margin-top: 40px;
-      align-items: center;
-    }
-
-    .logo-row img {
-      height: 40px;
-      opacity: 0.9;
-      filter: grayscale(100%);
-    }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--line);
-      padding-top: 60px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    footer img {
-      height: 34px;
-      margin: 0 16px;
-      filter: grayscale(100%);
-      opacity: 0.85;
-    }
-
-    @media (max-width: 768px) {
-      .brand { letter-spacing: 6px; font-size: 26px; }
-      .wrap { padding: 60px 20px; }
+    @media(max-width:800px){
+      .card{grid-column:span 12}
+      .brand{font-size:30px;letter-spacing:9px}
     }
   </style>
 </head>
 
 <body>
+<div class="wrap">
 
-  <div class="wrap">
-
-    <!-- HERO -->
-    <div class="hero">
-      <img src="assets/rizo-tech-logo.png" class="logo" alt="Rizo Tech Logo">
-      <div class="brand">R I Z O&nbsp;&nbsp;T E C H</div>
-      <div class="tagline">Frozen Beverage + Ice Machines • Southern California</div>
+  <div class="topbar">
+    <span>Owner-Led • Enterprise Service</span>
+    <div>
+      <a href="#about">About</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#contact">Contact</a>
     </div>
-
-    <!-- ABOUT -->
-    <section>
-      <span class="badge">Owner-Led • Field-Built</span>
-      <h2>About Us</h2>
-
-      <p>
-        Rizo Tech is a family-run refrigeration company built by owners who are still in the field.
-        We specialize exclusively in frozen beverage dispensers and ice machines for high-volume,
-        multi-location operations.
-      </p>
-
-      <p>
-        We do not chase small one-off repairs. Our work supports enterprise contracts with
-        100+ machines where uptime, accountability, and performance matter.
-      </p>
-
-      <p>
-        We built this company after years inside corporate service organizations where undertrained
-        technicians and constant callbacks were the norm. Our difference is simple:
-        the owners are the technicians. We solve the problem, verify the fix, and stand behind the work.
-      </p>
-    </section>
-
-    <!-- BRANDS -->
-    <section>
-      <h2>Equipment Expertise</h2>
-
-      <p>
-        We service and install the most demanding frozen beverage and ice systems in the industry.
-      </p>
-
-      <div class="logo-row">
-        <img src="assets/brand-cornelius.png" alt="Cornelius">
-        <img src="assets/brand-manitowoc.png" alt="Manitowoc">
-        <img src="assets/brand-schaerer.png" alt="Schaerer">
-        <img src="assets/brand-icee.png" alt="ICEE">
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section>
-      <h2>Contact</h2>
-      <p>
-        Enterprise inquiries only.
-        <br><br>
-        <strong>rizotech@outlook.com</strong>
-      </p>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-      <p>Partnered With</p>
-      <div style="margin-top: 24px;">
-        <img src="assets/partner-smuckers.png" alt="Smuckers">
-        <img src="assets/partner-gm.png" alt="GM">
-        <img src="assets/partner-conoco.png" alt="Conoco">
-      </div>
-    </footer>
-
   </div>
 
+  <div class="hero reveal">
+    <div class="logoWrap">
+      <img src="assets/rizo-tech-logo.png" class="logo" alt="Rizo Tech Logo">
+    </div>
+    <div class="brand">R I Z O&nbsp;&nbsp;T E C H</div>
+    <div class="tagline">Frozen Beverage + Ice Machines • Southern California</div>
+
+    <div class="heroActions">
+      <a class="btn" href="mailto:rizotech@outlook.com">Email Rizo Tech</a>
+      <a class="btn" href="#expertise">View Equipment</a>
+    </div>
+  </div>
+
+  <section id="about" class="reveal">
+    <h2>About</h2>
+    <p>
+      Rizo Tech is a family-run service company built by technicians who never left the field.
+      We specialize exclusively in frozen beverage dispensers and ice machines for high-volume,
+      multi-location operators.
+    </p>
+    <p>
+      We don’t chase small one-off calls. We maintain large contracts where uptime, accountability,
+      and technical depth matter. The owners are on the job, verifying work and eliminating callbacks.
+    </p>
+
+    <div class="grid">
+      <div class="card"><b>Owner Technicians</b><span>The people accountable are the people on site.</span></div>
+      <div class="card"><b>100+ Location Focus</b><span>Built for enterprise-scale operations.</span></div>
+      <div class="card"><b>Performance First</b><span>Low callbacks. Verified repairs.</span></div>
+    </div>
+  </section>
+
+  <section id="expertise" class="reveal">
+    <h2>Equipment Expertise</h2>
+    <p>We service and install frozen beverage and ice systems across major commercial platforms.</p>
+    <div class="logo-row">
+      <img src="assets/brand-cornelius.png">
+      <img src="assets/brand-servend.png">
+      <img src="assets/brand-schaerer.png">
+      <img src="assets/brand-manitowoc.png">
+      <img src="assets/brand-curtis.png">
+      <img src="assets/brand-icee.png">
+    </div>
+  </section>
+
+  <section id="contact" class="reveal">
+    <h2>Contact</h2>
+    <p>Southern California • Enterprise Contracts Only</p>
+    <a class="btn" href="mailto:rizotech@outlook.com">rizotech@outlook.com</a>
+  </section>
+
+  <footer class="reveal">
+    <p>Partnered With</p>
+    <img src="assets/partner-smuckers.png">
+    <img src="assets/partner-gm.png">
+    <img src="assets/partner-conoco.png">
+  </footer>
+
+</div>
+
+<script>
+  const io=new IntersectionObserver(e=>{
+    e.forEach(i=>{if(i.isIntersecting)i.target.classList.add('on')})
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>
