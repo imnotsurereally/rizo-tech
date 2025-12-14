@@ -15,6 +15,16 @@
       --line:#1c1c20;
       --shadow: rgba(0,0,0,.7);
       --radius:18px;
+
+      /* spacing scale */
+      --padX: 26px;
+      --wrapTop: 36px;
+      --wrapBottom: 120px;
+      --heroTop: 120px;
+      --heroBottom: 56px;
+      --sectionTop: 92px;
+      --sectionPadTop: 78px;
+      --stack: 20px;
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
@@ -44,11 +54,18 @@
       mask-image:radial-gradient(circle at 50% 25%, black 0%, transparent 70%);
     }
 
-    .wrap{max-width:1180px;margin:auto;padding:32px 22px 90px}
+    .wrap{
+      max-width:1180px;
+      margin:auto;
+      padding: var(--wrapTop) var(--padX) var(--wrapBottom);
+    }
 
     /* top bar */
     .topbar{
-      display:flex;justify-content:space-between;align-items:center;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 18px;
       padding:14px 18px;
       border:1px solid var(--line);
       border-radius:999px;
@@ -76,19 +93,23 @@
     .topbar a:hover{color:var(--text)}
 
     /* hero */
-    .hero{text-align:center;padding:90px 16px 20px;position:relative}
+    .hero{
+      text-align:center;
+      padding: var(--heroTop) 16px var(--heroBottom);
+      position:relative;
+    }
     .logoWrap{
-      width:190px;height:190px;margin:auto;
-      border-radius:34px;
+      width:200px;height:200px;margin:auto;
+      border-radius:36px;
       border:1px solid rgba(255,255,255,.12);
       background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
-      box-shadow:0 30px 90px var(--shadow);
+      box-shadow:0 34px 110px var(--shadow);
       display:grid;place-items:center;
       overflow:hidden;
     }
     .logo{
-      width:130px;
-      filter:drop-shadow(0 20px 40px rgba(0,0,0,.7));
+      width:136px;
+      filter:drop-shadow(0 22px 44px rgba(0,0,0,.7));
       animation:float 6s ease-in-out infinite;
     }
     @keyframes float{
@@ -97,24 +118,30 @@
     }
 
     .brand{
-      margin-top:26px;
-      font-size:52px;
+      margin-top:30px;
+      font-size:54px;
       font-weight:900;
-      letter-spacing:18px;
+      letter-spacing:20px;
       text-transform:uppercase;
     }
     .tagline{
-      margin-top:10px;
+      margin-top:14px;
       color:var(--muted);
       font-size:13px;
       font-weight:700;
-      letter-spacing:3.5px;
+      letter-spacing:3.8px;
       text-transform:uppercase;
+      max-width: 760px;
+      margin-left:auto;
+      margin-right:auto;
     }
 
     .heroActions{
-      margin-top:26px;
-      display:flex;justify-content:center;gap:14px;flex-wrap:wrap;
+      margin-top:32px;
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
     }
     .btn{
       padding:12px 18px;
@@ -130,39 +157,42 @@
     }
     .btn:hover{background:rgba(255,255,255,.08)}
 
+    /* sections */
     section{
-      margin-top:90px;
+      margin-top: var(--sectionTop);
       border-top:1px solid var(--line);
-      padding-top:60px
+      padding-top: var(--sectionPadTop);
     }
     h2{
       font-size:22px;
       font-weight:800;
       letter-spacing:8px;
       text-transform:uppercase;
-      margin-bottom:22px;
+      margin-bottom:26px;
     }
     p{
-      max-width:860px;
+      max-width:880px;
       color:var(--muted);
-      margin-bottom:18px;
-      font-size:15.5px;
-      line-height:1.6;
+      margin-bottom: var(--stack);
+      font-size:15.7px;
+      line-height:1.7;
+      margin-left:auto;
+      margin-right:auto;
     }
 
     /* cards */
     .grid{
       display:grid;
       grid-template-columns:repeat(12,1fr);
-      gap:14px;
-      margin-top:24px
+      gap:16px;
+      margin-top:34px;
     }
     .card{
       grid-column:span 4;
       border:1px solid var(--line);
       border-radius:var(--radius);
-      padding:18px;
-      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));
+      padding:20px 18px 22px;
+      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.012));
     }
     .card b{
       display:block;
@@ -170,48 +200,71 @@
       font-weight:800;
       letter-spacing:3px;
       text-transform:uppercase;
-      margin-bottom:10px;
+      margin-bottom:12px;
     }
-    .card span{color:var(--muted);font-size:14px}
+    .card span{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.65;
+    }
 
     /* logos */
     .logo-row{
       display:flex;
       flex-wrap:wrap;
-      gap:28px;
-      margin-top:22px;
-      align-items:center
+      justify-content:center;
+      gap:30px;
+      margin-top:34px;
+      align-items:center;
     }
     .logo-row img{
-      height:38px;
+      height:40px;
       filter:grayscale(100%);
-      opacity:.9;
+      opacity:.92;
+    }
+
+    /* contact tightening */
+    #contact p{
+      margin-bottom: 26px;
     }
 
     footer{
-      margin-top:90px;
+      margin-top:110px;
       border-top:1px solid var(--line);
-      padding-top:46px;
+      padding-top:56px;
       text-align:center;
       color:var(--muted);
       font-size:13px;
       font-weight:600;
       letter-spacing:2px;
     }
+    footer p{
+      margin-bottom: 22px;
+    }
     footer img{
       height:30px;
       margin:0 14px;
       filter:grayscale(100%);
-      opacity:.9;
+      opacity:.92;
     }
 
     /* reveal */
     .reveal{opacity:0;transform:translateY(14px);transition:.7s ease}
     .reveal.on{opacity:1;transform:none}
 
-    @media(max-width:800px){
+    @media(max-width:900px){
+      :root{
+        --padX: 18px;
+        --heroTop: 96px;
+        --sectionTop: 74px;
+        --sectionPadTop: 62px;
+      }
+      .brand{font-size:34px;letter-spacing:11px}
+      .logoWrap{width:176px;height:176px;border-radius:32px}
+      .logo{width:122px}
+      .grid{gap:14px}
       .card{grid-column:span 12}
-      .brand{font-size:30px;letter-spacing:9px}
+      p{line-height:1.75}
     }
   </style>
 </head>
@@ -254,9 +307,9 @@
     </p>
 
     <div class="grid">
-      <div class="card"><b>Owner Technicians</b><span>The people accountable are the people on site.</span></div>
-      <div class="card"><b>100+ Location Focus</b><span>Built for enterprise-scale operations.</span></div>
-      <div class="card"><b>Performance First</b><span>Low callbacks. Verified repairs.</span></div>
+      <div class="card"><b>Owner Technicians</b><span>The people accountable are the people on site. No handoffs. No excuses.</span></div>
+      <div class="card"><b>100+ Location Focus</b><span>Built for enterprise-scale operations where downtime is money.</span></div>
+      <div class="card"><b>Performance First</b><span>Low callbacks. Verified repairs. Predictable service standards.</span></div>
     </div>
   </section>
 
@@ -264,12 +317,12 @@
     <h2>Equipment Expertise</h2>
     <p>We service and install frozen beverage and ice systems across major commercial platforms.</p>
     <div class="logo-row">
-      <img src="assets/brand-cornelius.png">
-      <img src="assets/brand-servend.png">
-      <img src="assets/brand-schaerer.png">
-      <img src="assets/brand-manitowoc.png">
-      <img src="assets/brand-curtis.png">
-      <img src="assets/brand-icee.png">
+      <img src="assets/brand-cornelius.png" alt="Cornelius">
+      <img src="assets/brand-servend.png" alt="Servend">
+      <img src="assets/brand-schaerer.png" alt="Schaerer">
+      <img src="assets/brand-manitowoc.png" alt="Manitowoc">
+      <img src="assets/brand-curtis.png" alt="Curtis">
+      <img src="assets/brand-icee.png" alt="ICEE">
     </div>
   </section>
 
@@ -281,9 +334,9 @@
 
   <footer class="reveal">
     <p>Partnered With</p>
-    <img src="assets/partner-smuckers.png">
-    <img src="assets/partner-gm.png">
-    <img src="assets/partner-conoco.png">
+    <img src="assets/partner-smuckers.png" alt="Smuckers">
+    <img src="assets/partner-gm.png" alt="G&amp;M">
+    <img src="assets/partner-conoco.png" alt="Conoco">
   </footer>
 
 </div>
