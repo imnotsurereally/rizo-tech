@@ -5,17 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>RIZO TECH</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Fraunces:opsz,wght@9..144,300;9..144,500&display=swap" rel="stylesheet">
-
   <style>
     :root{
       --bg:#060709;
       --text:#e8e9ed;
       --muted:#a2a6b1;
     }
-
     *{box-sizing:border-box}
 
     body{
@@ -24,18 +19,17 @@
         radial-gradient(900px 600px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
         linear-gradient(180deg, #050608, #060709);
       color:var(--text);
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       letter-spacing:.2px;
+      text-align:center;
     }
 
     .wrap{
       max-width:900px;
       margin:0 auto;
       padding:56px 20px 90px;
-      text-align:center;
     }
 
-    /* LOGO */
     .logo-stage{
       display:grid;
       place-items:center;
@@ -43,38 +37,46 @@
       margin-bottom:48px;
     }
 
+    /* Parallax container */
     .logo-wrap{
       position:relative;
+      display:inline-grid;
+      place-items:center;
+      transform-style:preserve-3d;
+      will-change:transform;
     }
 
     .logo{
       width:min(340px, 82vw);
       height:auto;
-      animation: float 6s ease-in-out infinite;
       filter: drop-shadow(0 30px 60px rgba(0,0,0,.65));
-    }
-
-    .logo-wrap::after{
-      content:"";
-      position:absolute;
-      inset:-40%;
-      background:
-        radial-gradient(closest-side, rgba(255,255,255,.18), transparent 65%);
-      opacity:.35;
-      animation: glow 7s ease-in-out infinite;
-      pointer-events:none;
+      transform: translate3d(0,0,0);
+      transition: transform 120ms ease, filter 200ms ease;
+      will-change: transform;
+      animation: float 6.5s ease-in-out infinite;
     }
 
     @keyframes float{
-      0%{transform:translateY(0)}
-      50%{transform:translateY(-10px)}
-      100%{transform:translateY(0)}
+      0%{transform:translate3d(0,0,0)}
+      50%{transform:translate3d(0,-10px,0)}
+      100%{transform:translate3d(0,0,0)}
     }
 
-    @keyframes glow{
-      0%{opacity:.25}
-      50%{opacity:.45}
-      100%{opacity:.25}
+    /* Spotlight follows cursor */
+    .logo-wrap::after{
+      content:"";
+      position:absolute;
+      inset:-18%;
+      pointer-events:none;
+      background: radial-gradient(
+        380px 260px at var(--sx, 50%) var(--sy, 35%),
+        rgba(255,255,255,.12),
+        rgba(255,255,255,0) 65%
+      );
+      opacity:.75;
+      mix-blend-mode:screen;
+      filter: blur(6px);
+      transition: opacity 200ms ease;
     }
 
     .wordmark{
@@ -89,16 +91,12 @@
     .tagline{
       max-width:720px;
       margin:0 auto;
-      font-family:Fraunces, serif;
-      font-size:18px;
-      line-height:1.6;
+      font-size:16px;
+      line-height:1.7;
       color:var(--muted);
     }
 
-    /* SECTIONS */
-    section{
-      margin-top:56px;
-    }
+    section{ margin-top:56px; }
 
     .section-title{
       font-size:12px;
@@ -116,7 +114,6 @@
       color:rgba(232,233,237,.95);
     }
 
-    /* LOGOS */
     .logos{
       margin-top:28px;
       display:flex;
@@ -133,35 +130,24 @@
       filter: drop-shadow(0 12px 22px rgba(0,0,0,.4));
     }
 
-    /* CONTACT */
-    .contact{
-      margin-top:72px;
-    }
+    .contact{ margin-top:72px; }
 
     .email{
-      font-family:Fraunces, serif;
       font-size:20px;
       color:var(--text);
     }
-
-    .email a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    .email a:hover{
-      opacity:.85;
-    }
+    .email a{ color:inherit; text-decoration:none; }
+    .email a:hover{ opacity:.85; }
 
     @media (max-width:520px){
       .wrap{padding:44px 16px 72px}
       .logos img{height:26px}
-      .tagline{font-size:16px}
+      .tagline{font-size:15px}
     }
 
     @media (prefers-reduced-motion: reduce){
-      .logo{animation:none}
-      .logo-wrap::after{animation:none}
+      .logo{animation:none; transition:none}
+      .logo-wrap::after{display:none}
     }
   </style>
 </head>
@@ -169,9 +155,8 @@
 <body>
   <div class="wrap">
 
-    <!-- HERO -->
     <div class="logo-stage">
-      <div class="logo-wrap">
+      <div class="logo-wrap" id="logoHero">
         <img class="logo" src="assets/rizo-tech-logo.png" alt="Rizo Tech logo">
       </div>
 
@@ -182,7 +167,6 @@
       </p>
     </div>
 
-    <!-- ABOUT -->
     <section>
       <div class="section-title">About</div>
       <p class="section-text">
@@ -192,7 +176,6 @@
       </p>
     </section>
 
-    <!-- EQUIPMENT -->
     <section>
       <div class="section-title">Equipment Expertise</div>
       <p class="section-text">
@@ -202,16 +185,15 @@
 
       <div class="logos">
         <img src="assets/brand-cornelius.png" alt="Cornelius">
-        <img src="assets/brand-servend.png" alt="Servend">
+        <img src="assets/brand-servend.png" alt="Servend" onerror="this.style.display='none'">
         <img src="assets/brand-schaerer.png" alt="Schaerer">
         <img src="assets/brand-manitowoc.png" alt="Manitowoc">
-        <img src="assets/brand-curtis.png" alt="Curtis">
-        <img src="assets/brand.icee.png" alt="ICEE">
-        <img src="assets/brand-frazil.png" alt="Frazil">
+        <img src="assets/brand-curtis.png" alt="Curtis" onerror="this.style.display='none'">
+        <img src="assets/brand.icee.png" alt="ICEE" onerror="this.style.display='none'">
+        <img src="assets/brand-frazil.png" alt="Frazil" onerror="this.style.display='none'">
       </div>
     </section>
 
-    <!-- CONTACT -->
     <section class="contact">
       <div class="section-title">Contact</div>
       <div class="email">
@@ -220,5 +202,48 @@
     </section>
 
   </div>
+
+  <script>
+    // Ultra-subtle cursor parallax for the logo
+    (() => {
+      const hero = document.getElementById('logoHero');
+      if (!hero) return;
+      const img = hero.querySelector('img');
+      if (!img) return;
+
+      const damp = 0.07;  // smaller = calmer
+      const max = 7;      // px cap
+
+      let tx = 0, ty = 0, cx = 0, cy = 0;
+
+      function onMove(e){
+        const r = hero.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;
+        const y = (e.clientY - r.top) / r.height;
+
+        cx = (x - 0.5) * 2;
+        cy = (y - 0.5) * 2;
+
+        hero.style.setProperty('--sx', (x*100).toFixed(2) + '%');
+        hero.style.setProperty('--sy', (y*100).toFixed(2) + '%');
+      }
+
+      function tick(){
+        tx += (cx - tx) * damp;
+        ty += (cy - ty) * damp;
+
+        const px = Math.max(-max, Math.min(max, tx * max));
+        const py = Math.max(-max, Math.min(max, ty * max));
+
+        img.style.transform = `translate3d(${px}px, ${py}px, 0)`;
+        requestAnimationFrame(tick);
+      }
+
+      window.addEventListener('mousemove', onMove, { passive:true });
+      window.addEventListener('mouseleave', () => { cx = 0; cy = 0; }, { passive:true });
+
+      tick();
+    })();
+  </script>
 </body>
 </html>
