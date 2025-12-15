@@ -7,7 +7,6 @@
 
   <style>
     :root{
-      --bg:#060709;
       --text:#e8e9ed;
       --muted:#a2a6b1;
     }
@@ -15,19 +14,37 @@
 
     body{
       margin:0;
+      /* Gallery wall */
       background:
-        radial-gradient(900px 600px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
-        linear-gradient(180deg, #050608, #060709);
+        radial-gradient(900px 520px at 50% 10%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%),
+        radial-gradient(700px 440px at 20% 80%, rgba(255,255,255,.04), rgba(0,0,0,0) 62%),
+        linear-gradient(180deg, #050607 0%, #040506 55%, #030405 100%);
       color:var(--text);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       letter-spacing:.2px;
       text-align:center;
     }
 
+    /* subtle “gallery grain” */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.055;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(255,255,255,.12) 0px, rgba(255,255,255,.12) 1px, transparent 1px, transparent 3px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.10) 0px, rgba(255,255,255,.10) 1px, transparent 1px, transparent 4px);
+      mix-blend-mode:overlay;
+      filter: blur(0.35px);
+    }
+
     .wrap{
       max-width:900px;
       margin:0 auto;
       padding:56px 20px 90px;
+      position:relative;
+      z-index:1;
     }
 
     .logo-stage{
@@ -49,7 +66,7 @@
     .logo{
       width:min(340px, 82vw);
       height:auto;
-      filter: drop-shadow(0 30px 60px rgba(0,0,0,.65));
+      filter: drop-shadow(0 30px 60px rgba(0,0,0,.72));
       transform: translate3d(0,0,0);
       transition: transform 120ms ease, filter 200ms ease;
       will-change: transform;
@@ -86,6 +103,7 @@
       margin:0;
       padding-left:.34em;
       font-weight:400;
+      color:rgba(255,255,255,.92);
     }
 
     .tagline{
@@ -93,7 +111,7 @@
       margin:0 auto;
       font-size:16px;
       line-height:1.7;
-      color:var(--muted);
+      color:rgba(255,255,255,.68);
     }
 
     section{ margin-top:56px; }
@@ -102,7 +120,7 @@
       font-size:12px;
       letter-spacing:.4em;
       text-transform:uppercase;
-      color:var(--muted);
+      color:rgba(255,255,255,.62);
       margin-bottom:14px;
     }
 
@@ -111,7 +129,7 @@
       margin:0 auto;
       font-size:15px;
       line-height:1.8;
-      color:rgba(232,233,237,.95);
+      color:rgba(255,255,255,.82);
     }
 
     .logos{
@@ -127,14 +145,32 @@
       height:30px;
       width:auto;
       object-fit:contain;
-      filter: drop-shadow(0 12px 22px rgba(0,0,0,.4));
+      filter: drop-shadow(0 12px 22px rgba(0,0,0,.55));
+      opacity:.98;
+    }
+
+    /* Partner logos */
+    .partners{
+      margin-top:22px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+    .partners img{
+      height:26px;
+      width:auto;
+      object-fit:contain;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.55));
+      opacity:.98;
     }
 
     .contact{ margin-top:72px; }
 
     .email{
       font-size:20px;
-      color:var(--text);
+      color:rgba(255,255,255,.90);
     }
     .email a{ color:inherit; text-decoration:none; }
     .email a:hover{ opacity:.85; }
@@ -142,12 +178,14 @@
     @media (max-width:520px){
       .wrap{padding:44px 16px 72px}
       .logos img{height:26px}
+      .partners img{height:24px}
       .tagline{font-size:15px}
     }
 
     @media (prefers-reduced-motion: reduce){
       .logo{animation:none; transition:none}
       .logo-wrap::after{display:none}
+      body::before{display:none}
     }
   </style>
 </head>
@@ -155,6 +193,7 @@
 <body>
   <div class="wrap">
 
+    <!-- HERO -->
     <div class="logo-stage">
       <div class="logo-wrap" id="logoHero">
         <img class="logo" src="assets/rizo-tech-logo.png" alt="Rizo Tech logo">
@@ -167,6 +206,7 @@
       </p>
     </div>
 
+    <!-- ABOUT -->
     <section>
       <div class="section-title">About</div>
       <p class="section-text">
@@ -176,6 +216,7 @@
       </p>
     </section>
 
+    <!-- EQUIPMENT -->
     <section>
       <div class="section-title">Equipment Expertise</div>
       <p class="section-text">
@@ -183,7 +224,7 @@
         Our expertise also extends across a broad range of commercial frozen beverage machines and coffee systems.
       </p>
 
-      <div class="logos">
+      <div class="logos" aria-label="Supported brands">
         <img src="assets/brand-cornelius.png" alt="Cornelius">
         <img src="assets/brand-servend.png" alt="Servend" onerror="this.style.display='none'">
         <img src="assets/brand-schaerer.png" alt="Schaerer">
@@ -194,6 +235,17 @@
       </div>
     </section>
 
+    <!-- PARTNERS -->
+    <section>
+      <div class="section-title">Partnered with</div>
+      <div class="partners" aria-label="Partners">
+        <img src="assets/partner-smuckers.png" alt="Smucker's">
+        <img src="assets/partner-gm.png" alt="G&amp;M">
+        <img src="assets/partner-conoco.png" alt="Conoco">
+      </div>
+    </section>
+
+    <!-- CONTACT -->
     <section class="contact">
       <div class="section-title">Contact</div>
       <div class="email">
@@ -241,7 +293,6 @@
 
       window.addEventListener('mousemove', onMove, { passive:true });
       window.addEventListener('mouseleave', () => { cx = 0; cy = 0; }, { passive:true });
-
       tick();
     })();
   </script>
