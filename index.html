@@ -7,6 +7,7 @@
 
   <style>
     :root{
+      --bg:#060709;
       --text:#e8e9ed;
       --muted:#a2a6b1;
     }
@@ -14,37 +15,19 @@
 
     body{
       margin:0;
-      /* Gallery wall */
       background:
-        radial-gradient(900px 520px at 50% 10%, rgba(255,255,255,.06), rgba(0,0,0,0) 60%),
-        radial-gradient(700px 440px at 20% 80%, rgba(255,255,255,.04), rgba(0,0,0,0) 62%),
-        linear-gradient(180deg, #050607 0%, #040506 55%, #030405 100%);
+        radial-gradient(900px 600px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
+        linear-gradient(180deg, #050608, #060709);
       color:var(--text);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       letter-spacing:.2px;
       text-align:center;
     }
 
-    /* subtle “gallery grain” */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      opacity:.055;
-      background-image:
-        repeating-linear-gradient(0deg, rgba(255,255,255,.12) 0px, rgba(255,255,255,.12) 1px, transparent 1px, transparent 3px),
-        repeating-linear-gradient(90deg, rgba(255,255,255,.10) 0px, rgba(255,255,255,.10) 1px, transparent 1px, transparent 4px);
-      mix-blend-mode:overlay;
-      filter: blur(0.35px);
-    }
-
     .wrap{
       max-width:900px;
       margin:0 auto;
       padding:56px 20px 90px;
-      position:relative;
-      z-index:1;
     }
 
     .logo-stage{
@@ -54,17 +37,46 @@
       margin-bottom:48px;
     }
 
+    /* Parallax container */
+    .logo-wrap{
+      position:relative;
+      display:inline-grid;
+      place-items:center;
+      transform-style:preserve-3d;
+      will-change:transform;
+    }
+
     .logo{
       width:min(340px, 82vw);
       height:auto;
-      animation: float 6.2s ease-in-out infinite;
-      filter: drop-shadow(0 30px 60px rgba(0,0,0,.72));
+      filter: drop-shadow(0 30px 60px rgba(0,0,0,.65));
+      transform: translate3d(0,0,0);
+      transition: transform 120ms ease, filter 200ms ease;
+      will-change: transform;
+      animation: float 6.5s ease-in-out infinite;
     }
 
     @keyframes float{
-      0%{transform:translateY(0)}
-      50%{transform:translateY(-10px)}
-      100%{transform:translateY(0)}
+      0%{transform:translate3d(0,0,0)}
+      50%{transform:translate3d(0,-10px,0)}
+      100%{transform:translate3d(0,0,0)}
+    }
+
+    /* Spotlight follows cursor */
+    .logo-wrap::after{
+      content:"";
+      position:absolute;
+      inset:-18%;
+      pointer-events:none;
+      background: radial-gradient(
+        380px 260px at var(--sx, 50%) var(--sy, 35%),
+        rgba(255,255,255,.12),
+        rgba(255,255,255,0) 65%
+      );
+      opacity:.75;
+      mix-blend-mode:screen;
+      filter: blur(6px);
+      transition: opacity 200ms ease;
     }
 
     .wordmark{
@@ -74,7 +86,6 @@
       margin:0;
       padding-left:.34em;
       font-weight:400;
-      color:rgba(255,255,255,.92);
     }
 
     .tagline{
@@ -82,7 +93,7 @@
       margin:0 auto;
       font-size:16px;
       line-height:1.7;
-      color:rgba(255,255,255,.68);
+      color:var(--muted);
     }
 
     section{ margin-top:56px; }
@@ -91,7 +102,7 @@
       font-size:12px;
       letter-spacing:.4em;
       text-transform:uppercase;
-      color:rgba(255,255,255,.62);
+      color:var(--muted);
       margin-bottom:14px;
     }
 
@@ -100,7 +111,7 @@
       margin:0 auto;
       font-size:15px;
       line-height:1.8;
-      color:rgba(255,255,255,.82);
+      color:rgba(232,233,237,.95);
     }
 
     .logos{
@@ -116,15 +127,14 @@
       height:30px;
       width:auto;
       object-fit:contain;
-      filter: drop-shadow(0 12px 22px rgba(0,0,0,.55));
-      opacity:.98;
+      filter: drop-shadow(0 12px 22px rgba(0,0,0,.4));
     }
 
     .contact{ margin-top:72px; }
 
     .email{
       font-size:20px;
-      color:rgba(255,255,255,.90);
+      color:var(--text);
     }
     .email a{ color:inherit; text-decoration:none; }
     .email a:hover{ opacity:.85; }
@@ -136,8 +146,8 @@
     }
 
     @media (prefers-reduced-motion: reduce){
-      .logo{animation:none}
-      body::before{display:none}
+      .logo{animation:none; transition:none}
+      .logo-wrap::after{display:none}
     }
   </style>
 </head>
@@ -146,7 +156,9 @@
   <div class="wrap">
 
     <div class="logo-stage">
-      <img class="logo" src="assets/rizo-tech-logo.png" alt="Rizo Tech logo">
+      <div class="logo-wrap" id="logoHero">
+        <img class="logo" src="assets/rizo-tech-logo.png" alt="Rizo Tech logo">
+      </div>
 
       <h1 class="wordmark">R I Z O&nbsp;&nbsp;T E C H</h1>
 
@@ -190,5 +202,48 @@
     </section>
 
   </div>
+
+  <script>
+    // Ultra-subtle cursor parallax for the logo
+    (() => {
+      const hero = document.getElementById('logoHero');
+      if (!hero) return;
+      const img = hero.querySelector('img');
+      if (!img) return;
+
+      const damp = 0.07;  // smaller = calmer
+      const max = 7;      // px cap
+
+      let tx = 0, ty = 0, cx = 0, cy = 0;
+
+      function onMove(e){
+        const r = hero.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;
+        const y = (e.clientY - r.top) / r.height;
+
+        cx = (x - 0.5) * 2;
+        cy = (y - 0.5) * 2;
+
+        hero.style.setProperty('--sx', (x*100).toFixed(2) + '%');
+        hero.style.setProperty('--sy', (y*100).toFixed(2) + '%');
+      }
+
+      function tick(){
+        tx += (cx - tx) * damp;
+        ty += (cy - ty) * damp;
+
+        const px = Math.max(-max, Math.min(max, tx * max));
+        const py = Math.max(-max, Math.min(max, ty * max));
+
+        img.style.transform = `translate3d(${px}px, ${py}px, 0)`;
+        requestAnimationFrame(tick);
+      }
+
+      window.addEventListener('mousemove', onMove, { passive:true });
+      window.addEventListener('mouseleave', () => { cx = 0; cy = 0; }, { passive:true });
+
+      tick();
+    })();
+  </script>
 </body>
 </html>
