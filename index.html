@@ -72,6 +72,7 @@
       backdrop-filter: blur(6px);
     }
 
+    /* HERO stays as the only “container” (intentional) */
     .hero{
       margin-top:10px;
       padding:34px 16px 22px;
@@ -88,11 +89,11 @@
       content:"";
       position:absolute; inset:-2px;
       background:
-        radial-gradient(600px 220px at 50% 10%, rgba(255,255,255,.10), transparent 65%),
+        radial-gradient(600px 220px at 50% 10%, rgba(255,255,255,.12), transparent 65%),
         radial-gradient(380px 220px at 10% 40%, rgba(255,255,255,.06), transparent 70%),
         radial-gradient(380px 220px at 90% 40%, rgba(255,255,255,.05), transparent 70%);
       pointer-events:none;
-      opacity:.8;
+      opacity:.85;
     }
 
     .logoStage{
@@ -104,18 +105,71 @@
       z-index:2;
     }
 
+    /* stronger emblem motion + spotlight sweep */
+    .emblemWrap{
+      position:relative;
+      display:inline-grid;
+      place-items:center;
+      border-radius:28px;
+      isolation:isolate;
+    }
+
     .emblem{
-      width:min(320px, 76vw);
+      width:min(340px, 80vw);
       height:auto;
       display:block;
-      filter: drop-shadow(0 16px 36px rgba(0,0,0,.55));
+      filter: drop-shadow(0 18px 44px rgba(0,0,0,.60));
       transform-origin:center;
-      animation: float 7s ease-in-out infinite;
+      animation: floatStrong 5.8s ease-in-out infinite;
+      will-change: transform, filter;
     }
-    @keyframes float{
+
+    /* spotlight sweep */
+    .emblemWrap::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:
+        radial-gradient(closest-side at 50% 50%, rgba(255,255,255,.16), transparent 60%),
+        linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+      transform: translateX(-120%) rotate(12deg);
+      mix-blend-mode: screen;
+      opacity:.55;
+      animation: sweep 6.8s ease-in-out infinite;
+      pointer-events:none;
+      z-index:2;
+    }
+
+    /* subtle glint on hover */
+    .emblemWrap::after{
+      content:"";
+      position:absolute; inset:-20%;
+      background: linear-gradient(120deg, transparent 35%, rgba(255,255,255,.22) 50%, transparent 65%);
+      transform: translateX(-120%);
+      opacity:0;
+      pointer-events:none;
+      z-index:3;
+      transition: opacity .25s ease;
+    }
+    .emblemWrap:hover::after{
+      opacity:.9;
+      animation: glint 1.15s ease forwards;
+    }
+
+    @keyframes floatStrong{
       0%{transform:translateY(0) scale(1)}
-      50%{transform:translateY(-6px) scale(1.01)}
+      45%{transform:translateY(-10px) scale(1.02)}
       100%{transform:translateY(0) scale(1)}
+    }
+    @keyframes sweep{
+      0%{transform: translateX(-120%) rotate(12deg); opacity:.40}
+      40%{transform: translateX(0%) rotate(12deg); opacity:.65}
+      75%{transform: translateX(120%) rotate(12deg); opacity:.45}
+      100%{transform: translateX(120%) rotate(12deg); opacity:.35}
+    }
+    @keyframes glint{
+      0%{transform: translateX(-120%)}
+      100%{transform: translateX(120%)}
     }
 
     .wordmark{
@@ -164,12 +218,13 @@
       border-color:rgba(255,255,255,.18);
     }
 
+    /* CLEAN SECTIONS: no boxes, just spacing */
     .section{
-      margin-top:18px;
-      padding:22px 18px;
-      border:1px solid var(--hair);
-      border-radius:20px;
-      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      margin-top:34px;
+      padding:0;
+      border:none;
+      border-radius:0;
+      background:none;
       text-align:center;
     }
     .kicker{
@@ -244,12 +299,28 @@
     }
     .mail:hover{transform:translateY(-1px); background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.18)}
 
+    /* subtle divider line between blocks (luxury minimal) */
+    .divider{
+      width:min(720px, 92vw);
+      height:1px;
+      margin:28px auto 0;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.10), transparent);
+      border:0;
+    }
+
     @media (max-width:520px){
       .wrap{padding:18px 14px 70px}
       .hero{padding:28px 12px 18px}
       .logoImg{height:26px}
       .partnerImg{height:24px}
       .sub{font-size:14px}
+      .section{margin-top:28px}
+      .divider{margin-top:22px}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .emblem{animation:none}
+      .emblemWrap::before{animation:none; opacity:.25}
     }
   </style>
 </head>
@@ -269,7 +340,10 @@
 
     <section class="hero" id="top">
       <div class="logoStage">
-        <img class="emblem" src="assets/rizo-tech-logo.png" alt="Rizo Tech emblem" />
+        <div class="emblemWrap" aria-label="Rizo Tech emblem spotlight">
+          <img class="emblem" src="assets/rizo-tech-logo.png" alt="Rizo Tech emblem" />
+        </div>
+
         <h1 class="wordmark">R I Z O&nbsp;&nbsp;T E C H</h1>
 
         <p class="sub">
@@ -285,6 +359,8 @@
       </div>
     </section>
 
+    <hr class="divider">
+
     <section class="section" id="about">
       <p class="kicker">About</p>
       <h2 class="h2">Owner led field expertise</h2>
@@ -294,6 +370,8 @@
         We support multi location operators across Southern California with straightforward pricing, strong documentation, and dependable results.
       </p>
     </section>
+
+    <hr class="divider">
 
     <section class="section" id="equipment">
       <p class="kicker">Equipment we specialize in</p>
@@ -309,23 +387,23 @@
         <img class="logoImg" src="assets/brand-schaerer.png" alt="Schaerer" loading="lazy">
         <img class="logoImg" src="assets/brand-manitowoc.png" alt="Manitowoc" loading="lazy">
         <img class="logoImg" src="assets/brand-curtis.png" alt="Curtis" loading="lazy" onerror="this.style.display='none'">
-
-        <!-- FIXED: your repo file is brand.icee.png (with a dot), not brand-icee.png -->
         <img class="logoImg" src="assets/brand.icee.png" alt="ICEE" loading="lazy" onerror="this.style.display='none'">
-
-        <!-- NEW: upload your Frazil image as assets/brand-frazil.png -->
         <img class="logoImg" src="assets/brand-frazil.png" alt="Frazil" loading="lazy" onerror="this.style.display='none'">
       </div>
     </section>
+
+    <hr class="divider">
 
     <section class="section" id="partners">
       <p class="kicker">Partnered with</p>
       <div class="partners" aria-label="Partners">
         <img class="partnerImg" src="assets/partner-smuckers.png" alt="Smucker's" loading="lazy">
-        <img class="partnerImg" src="assets/partner-gm.png" alt="G&M" loading="lazy">
+        <img class="partnerImg" src="assets/partner-gm.png" alt="G&amp;M" loading="lazy">
         <img class="partnerImg" src="assets/partner-conoco.png" alt="Conoco" loading="lazy">
       </div>
     </section>
+
+    <hr class="divider">
 
     <section class="section" id="contact">
       <p class="kicker">Contact</p>
