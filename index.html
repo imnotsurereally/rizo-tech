@@ -6,7 +6,6 @@
   <title>RIZO TECH | Frozen Beverage + Ice Machines | Southern California</title>
   <meta name="description" content="RIZO TECH. Commercial frozen beverage dispensers and ice machines. Southern California." />
 
-  <!-- Premium, clean typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:opsz,wght@9..144,300;9..144,500&display=swap" rel="stylesheet">
@@ -14,14 +13,10 @@
   <style>
     :root{
       --bg:#07080a;
-      --panel:#0b0d10;
       --text:#e9eaee;
       --muted:#a7abb6;
       --hair:#1a1d24;
-      --soft:#0f1218;
-      --glow:rgba(255,255,255,.08);
-      --accent:#c9ccd6; /* quiet luxury silver */
-      --accent2:#8f97ab; /* cool slate */
+      --accent:#c9ccd6;
       --link:#e9eaee;
     }
 
@@ -48,7 +43,6 @@
       padding:28px 18px 80px;
     }
 
-    /* Top nav */
     .top{
       display:flex;
       align-items:center;
@@ -62,7 +56,7 @@
       text-transform:uppercase; color:var(--muted);
     }
     .top .dot{
-      width:6px; height:6px; border-radius:99px;
+      width:6px; height:6px; border-radius:999px;
       background:linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.15));
       box-shadow:0 0 0 4px rgba(255,255,255,.03);
     }
@@ -78,7 +72,6 @@
       backdrop-filter: blur(6px);
     }
 
-    /* Hero */
     .hero{
       margin-top:10px;
       padding:34px 16px 22px;
@@ -99,7 +92,6 @@
         radial-gradient(380px 220px at 10% 40%, rgba(255,255,255,.06), transparent 70%),
         radial-gradient(380px 220px at 90% 40%, rgba(255,255,255,.05), transparent 70%);
       pointer-events:none;
-      filter: blur(.2px);
       opacity:.8;
     }
 
@@ -109,6 +101,7 @@
       place-items:center;
       gap:14px;
       padding:10px 0 6px;
+      z-index:2;
     }
 
     .emblem{
@@ -131,7 +124,7 @@
       text-transform:uppercase;
       color:rgba(233,234,238,.92);
       text-shadow:0 10px 26px rgba(0,0,0,.45);
-      padding-left:.32em; /* keeps optical centering with big tracking */
+      padding-left:.32em;
       margin:0;
     }
 
@@ -141,22 +134,6 @@
       color:var(--muted);
       font-size:15px;
       line-height:1.6;
-    }
-
-    /* Luxury highlight line */
-    .lux{
-      margin-top:10px;
-      font-family:Fraunces, serif;
-      font-size:clamp(16px, 2.6vw, 20px);
-      line-height:1.5;
-      color:rgba(233,234,238,.92);
-    }
-    .lux .accent{
-      color:var(--accent);
-      text-shadow:0 0 20px rgba(255,255,255,.08);
-      border-bottom:1px solid rgba(255,255,255,.10);
-      padding-bottom:2px;
-      white-space:nowrap;
     }
 
     .actions{
@@ -187,7 +164,6 @@
       border-color:rgba(255,255,255,.18);
     }
 
-    /* Sections */
     .section{
       margin-top:18px;
       padding:22px 18px;
@@ -218,7 +194,6 @@
       line-height:1.75;
     }
 
-    /* Brands row (no "BRANDS" title) */
     .logos{
       margin-top:14px;
       display:flex;
@@ -234,12 +209,11 @@
       max-width:160px;
       object-fit:contain;
       filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
-      opacity:.98; /* allow true color */
+      opacity:.98;
       transition: transform .18s ease, opacity .18s ease;
     }
     .logoImg:hover{transform:translateY(-1px); opacity:1}
 
-    /* Partner strip */
     .partners{
       margin-top:12px;
       display:flex;
@@ -250,7 +224,6 @@
     }
     .partnerImg{height:26px; width:auto; max-width:140px; object-fit:contain; opacity:.98}
 
-    /* Footer contact */
     .contact{
       display:flex;
       justify-content:center;
@@ -271,7 +244,6 @@
     }
     .mail:hover{transform:translateY(-1px); background:rgba(255,255,255,.05); border-color:rgba(255,255,255,.18)}
 
-    /* Responsive tightening */
     @media (max-width:520px){
       .wrap{padding:18px 14px 70px}
       .hero{padding:28px 12px 18px}
@@ -297,19 +269,12 @@
 
     <section class="hero" id="top">
       <div class="logoStage">
-        <!-- Your logo image -->
         <img class="emblem" src="assets/rizo-tech-logo.png" alt="Rizo Tech emblem" />
-
-        <!-- Spaced wordmark -->
         <h1 class="wordmark">R I Z O&nbsp;&nbsp;T E C H</h1>
 
         <p class="sub">
           Commercial service and installation for frozen beverage dispensers and ice machines.
           Fast response, consistent workmanship, and clean communication.
-        </p>
-
-        <p class="lux">
-          Built for operators who <span class="accent">demand uptime</span> and predictable performance.
         </p>
 
         <div class="actions">
@@ -331,20 +296,25 @@
     </section>
 
     <section class="section" id="equipment">
-      <p class="kicker">Equipment we support</p>
+      <p class="kicker">Equipment we specialize in</p>
       <h2 class="h2">Trusted platforms, serviced correctly</h2>
       <p class="p">
         Service and installation across leading commercial systems. Genuine parts practices and reliable commissioning.
+        We also service a wider range of frozen beverage equipment and commercial coffee machines across major platforms.
       </p>
 
-      <!-- Use your uploaded assets (true color) -->
       <div class="logos" aria-label="Supported brands">
         <img class="logoImg" src="assets/brand-cornelius.png" alt="Cornelius" loading="lazy">
         <img class="logoImg" src="assets/brand-servend.png" alt="Servend" loading="lazy" onerror="this.style.display='none'">
         <img class="logoImg" src="assets/brand-schaerer.png" alt="Schaerer" loading="lazy">
         <img class="logoImg" src="assets/brand-manitowoc.png" alt="Manitowoc" loading="lazy">
         <img class="logoImg" src="assets/brand-curtis.png" alt="Curtis" loading="lazy" onerror="this.style.display='none'">
-        <img class="logoImg" src="assets/brand-icee.png" alt="ICEE" loading="lazy">
+
+        <!-- FIXED: your repo file is brand.icee.png (with a dot), not brand-icee.png -->
+        <img class="logoImg" src="assets/brand.icee.png" alt="ICEE" loading="lazy" onerror="this.style.display='none'">
+
+        <!-- NEW: upload your Frazil image as assets/brand-frazil.png -->
+        <img class="logoImg" src="assets/brand-frazil.png" alt="Frazil" loading="lazy" onerror="this.style.display='none'">
       </div>
     </section>
 
